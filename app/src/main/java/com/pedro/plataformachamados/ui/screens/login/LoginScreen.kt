@@ -32,15 +32,23 @@ import com.pedro.plataformachamados.ui.theme.Gray600
 import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    state: LoginUiState,
+    onEvent: (LoginUiEvent) -> Unit
+) {
 
-    Box(modifier.fillMaxSize()
-        .background(color = Gray600)) {
+    Box(
+        modifier
+            .fillMaxSize()
+            .background(color = Gray600)
+    ) {
         Image(
             painter = painterResource(R.drawable.login_background),
             contentDescription = "image_background",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.height(200.dp)
+            modifier = Modifier
+                .height(200.dp)
                 .fillMaxWidth()
         )
         Card(
@@ -50,7 +58,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
             elevation = CardDefaults.cardElevation(8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,7 +67,10 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        12.dp,
+                        Alignment.CenterHorizontally
+                    ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
@@ -67,20 +78,28 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                         painter = painterResource(R.drawable.logo_icondark),
                         contentDescription = "logo_icondark"
                     )
-                    Text(text = "HelpDesk", style = TypographyPersonalizada.textXl, color = BlueDark)
+                    Text(
+                        text = "HelpDesk",
+                        style = TypographyPersonalizada.textXl,
+                        color = BlueDark
+                    )
                 }
 
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
                     FormLogin(
-                        email = "",
-                        password = "",
-                        emailHasError = false,
-                        passwordHasError = false,
-                        helperTextEmail = "",
-                        helperTextPassword = "",
-                        onEmailChanged = {},
-                        onPasswordChanged = {},
+                        email = state.email,
+                        password = state.password,
+                        emailHasError = state.emailHasError,
+                        passwordHasError = state.passwordHasError,
+                        helperTextEmail = state.helperTextEmail,
+                        helperTextPassword = state.helperTextPassword,
+                        onEmailChanged = {
+                            onEvent(LoginUiEvent.OnEmailChanged(it))
+                        },
+                        onPasswordChanged = {
+                            onEvent(LoginUiEvent.OnPasswordChanged(it))
+                        },
                         onClickLogin = {}
                     )
 
@@ -100,5 +119,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(
+        state = LoginUiState(),
+        onEvent = {}
+    )
 }

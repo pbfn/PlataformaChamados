@@ -7,22 +7,31 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.pedro.plataformachamados.ui.screens.login.LoginScreen
+import com.pedro.plataformachamados.ui.screens.login.LoginViewModel
 import com.pedro.plataformachamados.ui.theme.PlataformaChamadosTheme
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val loginViewModel: LoginViewModel by viewModel()
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             PlataformaChamadosTheme {
+
+                val loginUiState = loginViewModel.uiState.collectAsState()
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LoginScreen(modifier = Modifier.padding(innerPadding))
+                    LoginScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        onEvent = loginViewModel::onEvent,
+                        state = loginUiState.value
+                    )
                 }
             }
         }
