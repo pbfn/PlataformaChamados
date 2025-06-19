@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.ui.components.buttons.CustomButton
@@ -39,6 +45,10 @@ fun FormRegister(
     passwordHasError: Boolean,
     onClickRegister: () -> Unit
 ) {
+
+    val focusManager = LocalFocusManager.current
+
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -76,7 +86,15 @@ fun FormRegister(
                     placeholder = "Digite o nome completo",
                     text = name,
                     label = "NOME",
-                    isError = nameHasError
+                    isError = nameHasError,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            focusManager.moveFocus(FocusDirection.Down)
+                        }
+                    ),
                 )
 
                 CustomTextField(
@@ -87,7 +105,15 @@ fun FormRegister(
                     placeholder = "exemplo@mail.com",
                     text = email,
                     label = "E-MAIL",
-                    isError = emailHasError
+                    isError = emailHasError,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            focusManager.moveFocus(FocusDirection.Down)
+                        }
+                    ),
                 )
 
                 CustomTextField(
@@ -98,13 +124,26 @@ fun FormRegister(
                     placeholder = "Digite sua senha",
                     text = password,
                     label = "Senha",
-                    isError = passwordHasError
+                    isError = passwordHasError,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            focusManager.clearFocus()
+                            onClickRegister()
+                        }
+                    ),
                 )
             }
 
             CustomButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = onClickRegister,
+                onClick = {
+                    focusManager.clearFocus()
+                    onClickRegister()
+                },
                 sizeCustomButton = SizeCustomButton.Large,
                 text = "Cadastrar",
                 typeCustomButton = TypeCustomButton.Primary

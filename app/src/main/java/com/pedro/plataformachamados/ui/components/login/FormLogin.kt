@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.ui.components.buttons.CustomButton
@@ -35,6 +41,9 @@ fun FormLogin(
     passwordHasError: Boolean,
     onClickLogin: () -> Unit
 ) {
+
+    val focusManager = LocalFocusManager.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -72,7 +81,15 @@ fun FormLogin(
                     placeholder = "exemplo@mail.com",
                     text = email,
                     label = "E-MAIL",
-                    isError = emailHasError
+                    isError = emailHasError,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            focusManager.moveFocus(FocusDirection.Down)
+                        }
+                    ),
                 )
 
                 CustomTextField(
@@ -83,13 +100,26 @@ fun FormLogin(
                     placeholder = "Digite sua senha",
                     text = password,
                     label = "Senha",
-                    isError = passwordHasError
+                    isError = passwordHasError,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            focusManager.clearFocus()
+                            onClickLogin()
+                        }
+                    ),
                 )
             }
 
             CustomButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = onClickLogin,
+                onClick = {
+                    focusManager.clearFocus()
+                    onClickLogin()
+                },
                 sizeCustomButton = SizeCustomButton.Large,
                 text = "Entrar",
                 typeCustomButton = TypeCustomButton.Primary
