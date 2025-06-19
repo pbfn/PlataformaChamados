@@ -38,6 +38,7 @@ val Typography = Typography(
 val latoFontFamily = FontFamily(
     Font(R.font.lato, FontWeight.Normal),
     Font(R.font.lato_bold, FontWeight.Bold),
+    Font(R.font.lato_italic, FontWeight.Light)
 )
 
 data class ExtraTypography(
