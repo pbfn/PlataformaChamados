@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.login
+package com.pedro.plataformachamados.ui.components.register
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -23,11 +23,12 @@ import com.pedro.plataformachamados.ui.theme.Gray500
 import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 
 @Composable
-fun BoxCreateAccount(
-    onGoToCreateAccount: () -> Unit
+fun BoxGoToLogin(
+    modifier: Modifier = Modifier,
+    onGoToLogin: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
 
             .clip(RoundedCornerShape(10.dp))
@@ -39,12 +40,12 @@ fun BoxCreateAccount(
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    "Ainda não tem uma conta",
+                    "Já tem uma conta?",
                     style = TypographyPersonalizada.headingMd.copy(fontWeight = FontWeight.Bold),
                     color = Gray200
                 )
                 Text(
-                    "Cadastre agora mesmo",
+                    "Entre agora mesmo",
                     style = TypographyPersonalizada.textXs,
                     color = Gray300
                 )
@@ -52,9 +53,9 @@ fun BoxCreateAccount(
 
             CustomButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = onGoToCreateAccount,
+                onClick = onGoToLogin,
                 sizeCustomButton = SizeCustomButton.Large,
-                text = "Criar conta",
+                text = "Acessar conta",
                 typeCustomButton = TypeCustomButton.Secondary
             )
         }
@@ -63,8 +64,6 @@ fun BoxCreateAccount(
 
 @Preview(showBackground = true)
 @Composable
-private fun BoxCreateAccountPrev() {
-    BoxCreateAccount(
-        onGoToCreateAccount = {}
-    )
+private fun BoxGoToLoginPrev() {
+    BoxGoToLogin(onGoToLogin = {})
 }
