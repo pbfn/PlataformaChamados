@@ -28,6 +28,7 @@ import com.pedro.plataformachamados.ui.theme.FeedbackDanger
 import com.pedro.plataformachamados.ui.theme.Gray200
 import com.pedro.plataformachamados.ui.theme.Gray300
 import com.pedro.plataformachamados.ui.theme.Gray400
+import com.pedro.plataformachamados.ui.theme.Gray500
 import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 
 @Composable
@@ -53,12 +54,13 @@ fun CustomTextField(
 
     val dividerColor = when {
         isFocused.value -> BlueBase
-        else -> Gray400
+        else -> Gray500
     }
 
     Column(modifier) {
         Text(text = label, style = TypographyPersonalizada.textXxs, color = primaryColor)
         BasicTextField(
+            interactionSource = interactionSource,
             value = text,
             onValueChange = { newText ->
                 onTextChanged(newText)
