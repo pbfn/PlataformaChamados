@@ -24,13 +24,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.R
+import com.pedro.plataformachamados.ui.components.register.BoxGoToLogin
 import com.pedro.plataformachamados.ui.components.register.FormRegister
 import com.pedro.plataformachamados.ui.theme.BlueDark
 import com.pedro.plataformachamados.ui.theme.Gray600
 import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 
 @Composable
-fun RegisterScreen(modifier: Modifier = Modifier) {
+fun RegisterScreen(
+    modifier: Modifier = Modifier,
+    navigateToLogin: () -> Unit
+) {
 
     Box(
         modifier
@@ -95,6 +99,12 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                         passwordHasError = false,
                         onClickRegister = {}
                     )
+
+                    BoxGoToLogin(
+                        onGoToLogin = {
+                            navigateToLogin()
+                        }
+                    )
                 }
 
 
@@ -106,5 +116,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun RegisterScreenPreview() {
-    RegisterScreen()
+    RegisterScreen(
+        navigateToLogin ={}
+    )
 }

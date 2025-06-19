@@ -34,7 +34,8 @@ import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 fun LoginScreen(
     modifier: Modifier = Modifier,
     state: LoginUiState,
-    onEvent: (LoginUiEvent) -> Unit
+    onEvent: (LoginUiEvent) -> Unit,
+    navigateToCreateAccount: () -> Unit
 ) {
 
     Box(
@@ -105,7 +106,9 @@ fun LoginScreen(
                     )
 
                     BoxCreateAccount(
-                        onGoToCreateAccount = {}
+                        onGoToCreateAccount = {
+                            navigateToCreateAccount()
+                        }
                     )
                 }
 
@@ -122,6 +125,7 @@ fun LoginScreen(
 private fun LoginScreenPreview() {
     LoginScreen(
         state = LoginUiState(),
-        onEvent = {}
+        onEvent = {},
+        navigateToCreateAccount = {}
     )
 }
