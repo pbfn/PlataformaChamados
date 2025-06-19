@@ -45,20 +45,26 @@ fun CustomButton(
         SizeCustomButton.Large -> 18.dp
     }
 
-    val containerColor = when(typeCustomButton){
+    val containerColor = when (typeCustomButton) {
         TypeCustomButton.Primary -> Gray200
         TypeCustomButton.Secondary -> Gray500
         TypeCustomButton.Link -> Color.Transparent
     }
 
-    val iconTextColor = when(typeCustomButton){
+    val iconTextColor = when (typeCustomButton) {
         TypeCustomButton.Primary -> Gray600
         TypeCustomButton.Secondary -> Gray200
         TypeCustomButton.Link -> Gray300
     }
 
     Button(
-        modifier = modifier.heightIn(min = heightIn),
+        modifier = modifier
+            .heightIn(min = heightIn)
+            .then(
+                if (text == null) {
+                    Modifier.size(heightIn)
+                } else Modifier
+            ),
         onClick = onClick,
         shape = RoundedCornerShape(5.dp),
         colors = ButtonDefaults.buttonColors(
