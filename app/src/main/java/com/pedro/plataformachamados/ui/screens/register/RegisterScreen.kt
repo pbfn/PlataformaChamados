@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.R
+import com.pedro.plataformachamados.ui.components.LogoIcon
 import com.pedro.plataformachamados.ui.components.register.BoxGoToLogin
 import com.pedro.plataformachamados.ui.components.register.FormRegister
 import com.pedro.plataformachamados.ui.theme.BlueDark
@@ -65,25 +66,7 @@ fun RegisterScreen(
                     .padding(horizontal = 24.dp, vertical = 32.dp),
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(
-                        12.dp,
-                        Alignment.CenterHorizontally
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        modifier = Modifier.size(40.dp),
-                        painter = painterResource(R.drawable.logo_icondark),
-                        contentDescription = "logo_icondark"
-                    )
-                    Text(
-                        text = "HelpDesk",
-                        style = TypographyPersonalizada.textXl,
-                        color = BlueDark
-                    )
-                }
+                LogoIcon()
 
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     FormRegister(
