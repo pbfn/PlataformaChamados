@@ -5,6 +5,7 @@ import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.repositories.AuthFirebaseRepositoryImpl
 import com.pedro.plataformachamados.ui.screens.login.LoginViewModel
 import com.pedro.plataformachamados.ui.screens.register.RegisterViewModel
+import com.pedro.plataformachamados.ui.screens.splash.SplashViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -12,6 +13,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::RegisterViewModel)
+    viewModelOf(::SplashViewModel)
 }
 
 val firebaseModule = module {

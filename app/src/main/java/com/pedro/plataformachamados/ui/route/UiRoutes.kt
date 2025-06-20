@@ -8,3 +8,9 @@ data object Login
 
 @Serializable
 data object Register
+
+@Serializable
+data object Splash
+
+@Serializable
+data object Home
