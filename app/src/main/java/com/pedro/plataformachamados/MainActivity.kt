@@ -14,6 +14,7 @@ import com.pedro.plataformachamados.ui.route.Register
 import com.pedro.plataformachamados.ui.screens.login.LoginScreen
 import com.pedro.plataformachamados.ui.screens.login.LoginViewModel
 import com.pedro.plataformachamados.ui.screens.register.RegisterScreen
+import com.pedro.plataformachamados.ui.screens.register.RegisterViewModel
 import com.pedro.plataformachamados.ui.theme.PlataformaChamadosTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,7 +29,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 val loginViewModel: LoginViewModel by viewModel()
+                val registerViewModel: RegisterViewModel by viewModel()
+
                 val loginUiState = loginViewModel.uiState.collectAsState()
+                val registerUiState = registerViewModel.registerUiState.collectAsState()
 
                 NavHost(
                     navController = navController,
@@ -54,7 +58,9 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(Login) {
                                     popUpTo(Register) { inclusive = true }
                                 }
-                            }
+                            },
+                            state = registerUiState.value,
+                            onEvent = registerViewModel::onEvent
                         )
                     }
                 }

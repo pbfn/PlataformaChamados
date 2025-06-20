@@ -33,6 +33,8 @@ import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
 @Composable
 fun RegisterScreen(
     modifier: Modifier = Modifier,
+    state: RegisterUiState,
+    onEvent: (RegisterUiEvent) -> Unit,
     navigateToLogin: () -> Unit
 ) {
 
@@ -85,19 +87,27 @@ fun RegisterScreen(
 
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     FormRegister(
-                        name = "",
-                        onNameChanged = { },
-                        helperTextName = "",
-                        nameHasError = false,
-                        email = "",
-                        onEmailChanged = {},
-                        helperTextEmail = "",
-                        emailHasError = false,
-                        password = "",
-                        onPasswordChanged = {},
-                        helperTextPassword = "Mínimo de 6 dígitos",
-                        passwordHasError = false,
-                        onClickRegister = {}
+                        name = state.name,
+                        onNameChanged = {
+                            onEvent(RegisterUiEvent.OnNameChanged(it))
+                        },
+                        helperTextName = state.helperTextName,
+                        nameHasError = state.nameHasError,
+                        email = state.email,
+                        onEmailChanged = {
+                            onEvent(RegisterUiEvent.OnEmailChanged(it))
+                        },
+                        helperTextEmail = state.helperTextEmail,
+                        emailHasError = state.emailHasError,
+                        password = state.password,
+                        onPasswordChanged = {
+                            onEvent(RegisterUiEvent.OnPasswordChanged(it))
+                        },
+                        helperTextPassword = state.helperTextPassword,
+                        passwordHasError = state.passwordHasError,
+                        onClickRegister = {
+                            onEvent(RegisterUiEvent.OnDoRegister)
+                        }
                     )
 
                     BoxGoToLogin(
@@ -117,6 +127,8 @@ fun RegisterScreen(
 @Composable
 private fun RegisterScreenPreview() {
     RegisterScreen(
-        navigateToLogin ={}
+        navigateToLogin = {},
+        state = RegisterUiState(),
+        onEvent = {}
     )
 }
