@@ -75,7 +75,6 @@ fun TopAppBarCustom(
         }
         Box(
             modifier = Modifier
-
                 .background(color = BlueDark, shape = RoundedCornerShape(50))
                 .size(40.dp),
             contentAlignment = Alignment.Center

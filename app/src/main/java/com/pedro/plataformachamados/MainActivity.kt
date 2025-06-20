@@ -17,6 +17,8 @@ import com.pedro.plataformachamados.ui.route.Home
 import com.pedro.plataformachamados.ui.route.Login
 import com.pedro.plataformachamados.ui.route.Register
 import com.pedro.plataformachamados.ui.route.Splash
+import com.pedro.plataformachamados.ui.screens.admin.home.HomeScreen
+import com.pedro.plataformachamados.ui.screens.admin.home.HomeViewModel
 import com.pedro.plataformachamados.ui.screens.login.LoginScreen
 import com.pedro.plataformachamados.ui.screens.login.LoginViewModel
 import com.pedro.plataformachamados.ui.screens.register.RegisterScreen
@@ -30,7 +32,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        // enableEdgeToEdge()
         setContent {
             PlataformaChamadosTheme {
 
@@ -39,10 +41,12 @@ class MainActivity : ComponentActivity() {
                 val loginViewModel: LoginViewModel by viewModel()
                 val registerViewModel: RegisterViewModel by viewModel()
                 val splashViewModel: SplashViewModel by viewModel()
+                val homeViewModel: HomeViewModel by viewModel()
 
                 val loginUiState = loginViewModel.uiState.collectAsState()
                 val registerUiState = registerViewModel.registerUiState.collectAsState()
                 val splashUiState = splashViewModel.state.collectAsState()
+                val homeUiState = homeViewModel.state.collectAsState()
 
                 NavHost(
                     navController = navController,
@@ -91,9 +95,11 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable<Home> {
-                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text("Home Screen")
-                        }
+                        //TODO Definir o tipo do usuário logado para definir para qual tela ele vai.
+                        HomeScreen(
+                            state = homeUiState.value,
+                            onEvent = homeViewModel::onEvent
+                        )
                     }
                 }
             }
