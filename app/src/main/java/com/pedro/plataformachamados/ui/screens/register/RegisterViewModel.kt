@@ -1,13 +1,18 @@
 package com.pedro.plataformachamados.ui.screens.register
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.ui.utils.isValidEmail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(
+    private val firebaseRepository: AuthFirebaseRepository
+) : ViewModel() {
 
     private val _registerUiState = MutableStateFlow(RegisterUiState())
     val registerUiState: StateFlow<RegisterUiState> = _registerUiState.asStateFlow()
@@ -68,7 +73,7 @@ class RegisterViewModel : ViewModel() {
 
         val hasError = emailError != null || passwordError != null || nameError != null
         if (!hasError) {
-            // TODO: navegar para próxima tela
+            onRegister(email,password)
         }
 
     }
@@ -91,5 +96,14 @@ class RegisterViewModel : ViewModel() {
 
     private fun validateName(name: String): String? {
         return if (name.isBlank()) "Nome não pode ser vazio!" else null
+    }
+
+    private fun onRegister(email: String, password: String) {
+        viewModelScope.launch {
+           val retorno =  firebaseRepository.register(
+                email, password
+            )
+        }
+
     }
 }

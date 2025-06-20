@@ -1,13 +1,18 @@
 package com.pedro.plataformachamados.ui.screens.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.ui.utils.isValidEmail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val firebaseRepository: AuthFirebaseRepository
+) : ViewModel() {
 
 
     private val _loginUiState = MutableStateFlow(LoginUiState())
@@ -56,7 +61,7 @@ class LoginViewModel : ViewModel() {
 
         val hasError = emailError != null || passwordError != null
         if (!hasError) {
-            // TODO: navegar para próxima tela
+            onLogin(email,password)
         }
 
     }
@@ -74,4 +79,11 @@ class LoginViewModel : ViewModel() {
         return if (password.isBlank()) "Senha não pode ser vazia!" else null
     }
 
+    private fun onLogin(email: String, password: String) {
+        viewModelScope.launch {
+            val retorno = firebaseRepository.login(
+                email, password
+            )
+        }
+    }
 }
