@@ -25,6 +25,7 @@ fun SplashScreen(
     state: SplashScreenUiState,
     onNavigateToLogin: () -> Unit,
     onNavigateToHome: () -> Unit,
+    onSplashFinished: () -> Unit,
     onEvent: (SplashUiEvent) -> Unit
 ) {
 
@@ -66,6 +67,8 @@ fun SplashScreen(
                 if (state.isLogged)
                     onNavigateToHome()
                 else onNavigateToLogin()
+
+                onSplashFinished()
             }
         }
     }
@@ -80,6 +83,7 @@ private fun SplashScreenPreview() {
         state = SplashScreenUiState.Loading,
         onNavigateToLogin = {},
         onNavigateToHome = {},
+        onSplashFinished = {},
         onEvent = {}
     )
 }

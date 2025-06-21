@@ -1,6 +1,7 @@
 package com.pedro.plataformachamados.repositories
 
 import com.google.firebase.auth.FirebaseAuth
+import com.pedro.plataformachamados.data.global_state.UserStateHolder
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +10,8 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class AuthFirebaseRepositoryImpl(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val userStateHolder: UserStateHolder
 ): AuthFirebaseRepository {
 
     private val tag = "AuthFirebaseRepository"
@@ -17,6 +19,7 @@ class AuthFirebaseRepositoryImpl(
     override fun isLoggedIn(): Boolean {
         return if (firebaseAuth.currentUser != null) {
             println(tag + "Already logged")
+            userStateHolder.updateUserState()
             true
         } else false
     }
@@ -53,6 +56,7 @@ class AuthFirebaseRepositoryImpl(
                     .addOnSuccessListener {
                         println("$tag login success")
                         continuation.resume(true)
+                        userStateHolder.updateUserState()
                     }
                     .addOnFailureListener {
                         println("$tag login failure")
@@ -70,6 +74,7 @@ class AuthFirebaseRepositoryImpl(
 
     override fun logout(){
         firebaseAuth.signOut()
+        userStateHolder.clearUser()
     }
 
 }

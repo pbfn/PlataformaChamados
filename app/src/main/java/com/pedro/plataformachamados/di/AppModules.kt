@@ -1,6 +1,8 @@
 package com.pedro.plataformachamados.di
 
 import com.google.firebase.auth.FirebaseAuth
+import com.pedro.plataformachamados.data.global_state.UserStateHolder
+import com.pedro.plataformachamados.data.global_state.UserStateHolderImpl
 import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.repositories.AuthFirebaseRepositoryImpl
 import com.pedro.plataformachamados.ui.screens.admin.home.HomeViewModel
@@ -24,6 +26,10 @@ val firebaseModule = module {
 
 val repositoriesModule = module {
     single<AuthFirebaseRepository> {
-        AuthFirebaseRepositoryImpl(get())
+        AuthFirebaseRepositoryImpl(get(), get())
     }
+}
+
+val appModule = module {
+    single<UserStateHolder> { UserStateHolderImpl() }
 }

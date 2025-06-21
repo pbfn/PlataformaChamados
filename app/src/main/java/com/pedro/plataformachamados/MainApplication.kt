@@ -1,6 +1,7 @@
 package com.pedro.plataformachamados
 
 import android.app.Application
+import com.pedro.plataformachamados.di.appModule
 import com.pedro.plataformachamados.di.firebaseModule
 import com.pedro.plataformachamados.di.repositoriesModule
 import com.pedro.plataformachamados.di.viewModelModule
@@ -19,7 +20,8 @@ class MainApplication : Application() {
             modules(
                 viewModelModule,
                 firebaseModule,
-                repositoriesModule
+                repositoriesModule,
+                appModule
             )
         }
     }
