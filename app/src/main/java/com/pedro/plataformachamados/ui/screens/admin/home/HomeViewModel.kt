@@ -2,6 +2,7 @@ package com.pedro.plataformachamados.ui.screens.admin.home
 
 import androidx.lifecycle.ViewModel
 import com.pedro.plataformachamados.R
+import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.ui.components.menu.ItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.menu.TypeItemMenuDrawer
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,7 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val firebaseRepository: AuthFirebaseRepository
+) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeUiState())
     val state: StateFlow<HomeUiState> = _state.asStateFlow()
@@ -70,6 +73,11 @@ class HomeViewModel : ViewModel() {
                 selectedItemMenuDrawer = newItem
             )
         }
+
+        when (newItem) {
+            TypeItemMenuDrawer.Logout -> onLogout()
+            else -> null
+        }
     }
 
     private fun onChangeIconTopAppBar(isOpen: Boolean) {
@@ -78,6 +86,10 @@ class HomeViewModel : ViewModel() {
                 iconTopAppBar = if (isOpen) R.drawable.x else R.drawable.menu,
             )
         }
+    }
+
+    private fun onLogout() {
+        firebaseRepository.logout()
     }
 
 }

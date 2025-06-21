@@ -65,7 +65,7 @@ fun SplashScreen(
             is SplashScreenUiState.Success -> {
                 if (state.isLogged)
                     onNavigateToHome()
-                else onNavigateToLogin
+                else onNavigateToLogin()
             }
         }
     }
