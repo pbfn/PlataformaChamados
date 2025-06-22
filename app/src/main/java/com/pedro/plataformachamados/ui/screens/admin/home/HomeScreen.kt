@@ -20,6 +20,7 @@ import com.pedro.plataformachamados.ui.components.menu.DrawerSubMenuContent
 import com.pedro.plataformachamados.ui.components.menu.ItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.menu.TypeItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.topappbar.TopAppBarCustom
+import com.pedro.plataformachamados.ui.screens.admin.technicians.TechnicianScreen
 import com.pedro.plataformachamados.ui.theme.Gray100
 import kotlinx.coroutines.launch
 
@@ -94,7 +95,9 @@ fun HomeScreen(
                 }
             }
         ) {
-
+            TechnicianScreen(
+                onClickAddTechnician = {  }
+            )
         }
     }
 
