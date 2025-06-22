@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.admin.technicians
+package com.pedro.plataformachamados.ui.screens.admin.technicians.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
