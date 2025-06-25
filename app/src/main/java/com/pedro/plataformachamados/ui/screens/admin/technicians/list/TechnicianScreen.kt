@@ -29,8 +29,7 @@ fun TechnicianScreen(
 
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 28.dp),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
