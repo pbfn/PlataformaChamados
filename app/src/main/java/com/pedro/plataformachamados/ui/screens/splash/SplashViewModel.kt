@@ -2,11 +2,11 @@ package com.pedro.plataformachamados.ui.screens.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import repositories.AuthFirebaseRepository
 
 class SplashViewModel(
     private val firebaseRepository: AuthFirebaseRepository

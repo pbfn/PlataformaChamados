@@ -2,9 +2,8 @@ package com.pedro.plataformachamados
 
 import android.app.Application
 import com.pedro.plataformachamados.di.appModule
-import com.pedro.plataformachamados.di.firebaseModule
-import com.pedro.plataformachamados.di.repositoriesModule
 import com.pedro.plataformachamados.di.viewModelModule
+import di.provideFirebaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,13 +13,15 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+
+
         startKoin {
             androidLogger(level = Level.DEBUG)
             androidContext(this@MainApplication)
             modules(
+                provideFirebaseModule(),
                 viewModelModule,
-                firebaseModule,
-                repositoriesModule,
                 appModule
             )
         }

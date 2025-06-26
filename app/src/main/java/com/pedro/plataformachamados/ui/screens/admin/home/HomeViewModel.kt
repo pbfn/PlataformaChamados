@@ -2,13 +2,13 @@ package com.pedro.plataformachamados.ui.screens.admin.home
 
 import androidx.lifecycle.ViewModel
 import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.repositories.AuthFirebaseRepository
 import com.pedro.plataformachamados.ui.components.menu.ItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.menu.TypeItemMenuDrawer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import repositories.AuthFirebaseRepository
 
 class HomeViewModel(
     private val firebaseRepository: AuthFirebaseRepository

@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.data.global_state
+package data.global_state
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

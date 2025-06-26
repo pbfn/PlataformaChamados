@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pedro.plataformachamados.data.global_state.UserStateHolder
 import com.pedro.plataformachamados.ui.route.Home
 import com.pedro.plataformachamados.ui.route.Login
 import com.pedro.plataformachamados.ui.route.Register
@@ -26,6 +25,7 @@ import com.pedro.plataformachamados.ui.screens.register.RegisterViewModel
 import com.pedro.plataformachamados.ui.screens.splash.SplashScreen
 import com.pedro.plataformachamados.ui.screens.splash.SplashViewModel
 import com.pedro.plataformachamados.ui.theme.PlataformaChamadosTheme
+import data.global_state.UserStateHolder
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

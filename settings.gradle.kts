@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "PlataformaChamados"
 include(":app")
+
+include(":core:auth")

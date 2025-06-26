@@ -1,7 +1,7 @@
-package com.pedro.plataformachamados.repositories
+package repositories
 
 import com.google.firebase.auth.FirebaseAuth
-import com.pedro.plataformachamados.data.global_state.UserStateHolder
+import data.global_state.UserStateHolder
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 class AuthFirebaseRepositoryImpl(
     private val firebaseAuth: FirebaseAuth,
     private val userStateHolder: UserStateHolder
-): AuthFirebaseRepository {
+) : AuthFirebaseRepository {
 
     private val tag = "AuthFirebaseRepository"
 
@@ -72,9 +72,8 @@ class AuthFirebaseRepositoryImpl(
         }
     }
 
-    override fun logout(){
+    override fun logout() {
         firebaseAuth.signOut()
         userStateHolder.clearUser()
     }
-
 }

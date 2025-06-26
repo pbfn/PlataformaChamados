@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.data.global_state
+package data.global_state
 
 data class UserState(
     val isLoggedIn: Boolean = false
