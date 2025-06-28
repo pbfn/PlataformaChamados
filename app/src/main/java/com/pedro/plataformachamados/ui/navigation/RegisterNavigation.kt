@@ -1,0 +1,36 @@
+package com.pedro.plataformachamados.ui.navigation
+
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
+import androidx.navigation.compose.composable
+import com.pedro.plataformachamados.ui.screens.register.RegisterScreen
+import com.pedro.plataformachamados.ui.screens.register.RegisterViewModel
+import org.koin.androidx.compose.koinViewModel
+
+
+const val registerRoute: String = "register"
+
+fun NavGraphBuilder.registerScreen(
+    onNavigateToLogin: () -> Unit
+) {
+    composable(registerRoute) {
+        val viewModel = koinViewModel<RegisterViewModel>()
+        val state by viewModel.registerUiState.collectAsState()
+        RegisterScreen(
+            modifier = Modifier,
+            navigateToLogin = onNavigateToLogin,
+            state = state,
+            onEvent = viewModel::onEvent
+        )
+    }
+}
+
+fun NavHostController.navigateToRegister(
+    navOptions: NavOptions? = null
+) {
+    navigate(registerRoute, navOptions)
+}

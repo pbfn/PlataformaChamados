@@ -2,7 +2,6 @@ package com.pedro.plataformachamados
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
-import com.pedro.plataformachamados.di.appModule
 import com.pedro.plataformachamados.di.viewModelModule
 import di.provideFirebaseModule
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +22,6 @@ class MainApplication : Application() {
             modules(
                 provideFirebaseModule(),
                 viewModelModule,
-                appModule
             )
         }
     }

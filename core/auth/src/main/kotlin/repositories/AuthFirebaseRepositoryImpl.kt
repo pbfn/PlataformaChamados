@@ -1,28 +1,37 @@
 package repositories
 
 import com.google.firebase.auth.FirebaseAuth
-import data.global_state.UserStateHolder
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import model.AuthResult
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class AuthFirebaseRepositoryImpl(
     private val firebaseAuth: FirebaseAuth,
-    private val userStateHolder: UserStateHolder
 ) : AuthFirebaseRepository {
 
     private val tag = "AuthFirebaseRepository"
 
-    override fun isLoggedIn(): Boolean {
-        return if (firebaseAuth.currentUser != null) {
-            println(tag + "Already logged")
-            userStateHolder.updateUserState()
-            true
-        } else false
+    private val _currentUser = MutableStateFlow(AuthResult())
+    override val currentUser = _currentUser.asStateFlow()
+
+    init {
+        firebaseAuth.addAuthStateListener { firebaseAuth ->
+            _currentUser.update {
+                it.copy(
+                    currentUser = firebaseAuth.currentUser,
+                    isInitLoading = false
+                )
+            }
+        }
     }
+
 
     override suspend fun register(email: String, password: String): Boolean {
         try {
@@ -56,7 +65,6 @@ class AuthFirebaseRepositoryImpl(
                     .addOnSuccessListener {
                         println("$tag login success")
                         continuation.resume(true)
-                        userStateHolder.updateUserState()
                     }
                     .addOnFailureListener {
                         println("$tag login failure")
@@ -74,6 +82,5 @@ class AuthFirebaseRepositoryImpl(
 
     override fun logout() {
         firebaseAuth.signOut()
-        userStateHolder.clearUser()
     }
 }
