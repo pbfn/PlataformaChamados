@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "555324045251",
+    "project_id": "plataformachamados",
+    "storage_bucket": "plataformachamados.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555324045251:android:03d2b372ab1df1f9702f76",
+        "android_client_info": {
+          "package_name": "com.pedro.plataformachamados"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMvfukUP6SK-Fu4xjOBr6rKAoEAriJXxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
