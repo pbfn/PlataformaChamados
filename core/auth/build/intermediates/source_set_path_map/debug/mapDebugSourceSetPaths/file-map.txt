@@ -1,0 +1,17 @@
+com.pedro.plataformachamados.auth-core-1.2.0-0 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\2deb31d0426a4c655747837ec903d40c\transformed\core-1.2.0\res
+com.pedro.plataformachamados.auth-browser-1.4.0-1 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\3ba4df4cd6e0deff8f63720bed3eb2c0\transformed\browser-1.4.0\res
+com.pedro.plataformachamados.auth-credentials-play-services-auth-1.2.0-rc01-2 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\818b1327e2b61399b5a74dd27901388c\transformed\credentials-play-services-auth-1.2.0-rc01\res
+com.pedro.plataformachamados.auth-firebase-common-21.0.0-3 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\968f8ed48fcf13559543c2878040f735\transformed\firebase-common-21.0.0\res
+com.pedro.plataformachamados.auth-core-common-2.0.3-4 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\a2e9b4919170a440067356e57a90fd81\transformed\core-common-2.0.3\res
+com.pedro.plataformachamados.auth-play-services-auth-20.7.0-5 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\a3617f093cfbf1996e757384ce918872\transformed\play-services-auth-20.7.0\res
+com.pedro.plataformachamados.auth-play-services-basement-18.4.0-6 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\a55c61536d0338864048907998c71757\transformed\play-services-basement-18.4.0\res
+com.pedro.plataformachamados.auth-play-services-base-18.0.1-7 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\c18245e5b3811738c54457221e5ef59f\transformed\play-services-base-18.0.1\res
+com.pedro.plataformachamados.auth-credentials-1.2.0-rc01-8 C:\Users\pbrun\.gradle\caches\8.11.1\transforms\fe4a7d365888d1320e18b858199ed372\transformed\credentials-1.2.0-rc01\res
+com.pedro.plataformachamados.auth-pngs-9 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\generated\res\pngs\debug
+com.pedro.plataformachamados.auth-res-10 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\generated\res\processDebugGoogleServices
+com.pedro.plataformachamados.auth-resValues-11 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\generated\res\resValues\debug
+com.pedro.plataformachamados.auth-packageDebugResources-12 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.pedro.plataformachamados.auth-packageDebugResources-13 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.pedro.plataformachamados.auth-debug-14 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\build\intermediates\merged_res\debug\mergeDebugResources
+com.pedro.plataformachamados.auth-debug-15 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\src\debug\res
+com.pedro.plataformachamados.auth-main-16 C:\Users\pbrun\AndroidStudioProjects\PlataformaChamados\core\auth\src\main\res
