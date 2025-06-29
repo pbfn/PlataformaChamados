@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.register
+package com.pedro.register_user.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

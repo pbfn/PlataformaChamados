@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.register
+package com.pedro.register_user.ui.screens.register_user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.design_system.ui.components.LogoIcon
 import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.ui.components.register.BoxGoToLogin
-import com.pedro.plataformachamados.ui.components.register.FormRegister
+import com.pedro.register_user.ui.components.BoxGoToLogin
+import com.pedro.register_user.ui.components.FormRegister
 import com.pedro.design_system.ui.theme.Gray600
 
 @Composable

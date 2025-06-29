@@ -7,8 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.pedro.plataformachamados.ui.screens.register.RegisterScreen
-import com.pedro.plataformachamados.ui.screens.register.RegisterViewModel
+import com.pedro.register_user.ui.screens.register_user.RegisterScreen
+import com.pedro.register_user.ui.screens.register_user.RegisterViewModel
 import org.koin.androidx.compose.koinViewModel
 
 

@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.register
+package com.pedro.register_user.ui.screens.register_user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
