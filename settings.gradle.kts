@@ -23,3 +23,4 @@ rootProject.name = "PlataformaChamados"
 include(":app")
 
 include(":core:auth")
+include(":core:design_system")
