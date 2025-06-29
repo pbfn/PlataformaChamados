@@ -9,19 +9,11 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import provider.FirebaseManager
-
 class MainApplication : Application() {
 
 
-    //private val firebaseManager by inject<FirebaseManager>()
-
     override fun onCreate() {
         super.onCreate()
-
-        //FirebaseApp.initializeApp(this)
-
-       // firebaseManager.init(this)
 
         startKoin {
             androidLogger(level = Level.DEBUG)
