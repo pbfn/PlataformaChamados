@@ -8,9 +8,7 @@ import androidx.navigation.navigation
 
 const val homeGraphRoute = "homeGraph"
 
-fun NavGraphBuilder.homeGraph(
-    onPopBackStack: () -> Unit,
-) {
+fun NavGraphBuilder.homeGraph() {
     navigation(
         startDestination = homeAdmRoute,
         route = homeGraphRoute

@@ -19,13 +19,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.pedro.plataformachamados.R
 import com.pedro.plataformachamados.ui.components.menu.DrawerMenuContent
 import com.pedro.plataformachamados.ui.components.menu.DrawerSubMenuContent
 import com.pedro.plataformachamados.ui.components.menu.ItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.menu.TypeItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.topappbar.TopAppBarCustom
-import com.pedro.plataformachamados.ui.screens.admin.technicians.list.TechnicianScreen
+import com.pedro.plataformachamados.ui.navigation.admin.addTechnicianScreen
+import com.pedro.plataformachamados.ui.navigation.admin.drawerHomeAdmGraph
+import com.pedro.plataformachamados.ui.navigation.admin.drawerHomeAdmGraphRoute
+import com.pedro.plataformachamados.ui.navigation.admin.navigateToAddTechnicianScreen
+import com.pedro.plataformachamados.ui.navigation.admin.navigateToServicesScreen
+import com.pedro.plataformachamados.ui.navigation.admin.navigateToTechnicianScreen
+import com.pedro.plataformachamados.ui.navigation.admin.navigateToTicketsScreen
 import com.pedro.plataformachamados.ui.theme.Gray100
 import com.pedro.plataformachamados.ui.theme.Gray200
 import kotlinx.coroutines.launch
@@ -44,6 +53,9 @@ fun HomeScreen(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     val scope = rememberCoroutineScope()
+
+    val navController = rememberNavController()
+
     Column(modifier) {
         TopAppBarCustom(
             iconButton = state.iconTopAppBar,
@@ -79,6 +91,47 @@ fun HomeScreen(
                                     onEvent(HomeUiEvent.OnChangeIconTopAppBar(isOpen))
                                 }
                             }
+
+                            when (newItem) {
+                                TypeItemMenuDrawer.Ticket -> navController.navigateToTicketsScreen(
+                                    navOptions =
+                                        navOptions {
+                                            launchSingleTop = true
+                                            popUpTo(drawerHomeAdmGraphRoute) {
+                                                inclusive = false
+                                            }
+                                        }
+                                )
+
+                                TypeItemMenuDrawer.Technician -> navController.navigateToTechnicianScreen(
+                                    navOptions =
+                                        navOptions {
+                                            launchSingleTop = true
+                                            popUpTo(drawerHomeAdmGraphRoute) {
+                                                inclusive = false
+                                            }
+                                        }
+                                )
+                                TypeItemMenuDrawer.Service -> navController.navigateToServicesScreen(
+                                    navOptions =
+                                        navOptions {
+                                            launchSingleTop = true
+                                            popUpTo(drawerHomeAdmGraphRoute) {
+                                                inclusive = false
+                                            }
+                                        }
+                                )
+
+                                else -> navController.navigateToServicesScreen(
+                                    navOptions =
+                                        navOptions {
+                                            launchSingleTop = true
+                                            popUpTo(drawerHomeAdmGraphRoute) {
+                                                inclusive = false
+                                            }
+                                        }
+                                )
+                            }
                         }
                     )
 
@@ -111,9 +164,24 @@ fun HomeScreen(
                     )
                     .padding(horizontal = 24.dp, vertical = 28.dp)
             ) {
-                TechnicianScreen(
-                    onClickAddTechnician = { }
-                )
+                NavHost(
+                    navController = navController,
+                    startDestination = drawerHomeAdmGraphRoute
+                ) {
+
+                    drawerHomeAdmGraph(
+                        onNavigateToAddTechnician = {
+                            navController.navigateToAddTechnicianScreen()
+                        }
+                    )
+
+                    addTechnicianScreen(
+                        onPopBackStack = {
+                            navController.popBackStack()
+                        }
+                    )
+
+                }
             }
 
         }

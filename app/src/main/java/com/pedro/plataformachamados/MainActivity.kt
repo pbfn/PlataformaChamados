@@ -61,11 +61,7 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
-                    homeGraph(
-                        onPopBackStack = {
-                            navController.popBackStack()
-                        }
-                    )
+                    homeGraph()
 
                 }
             }

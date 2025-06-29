@@ -53,7 +53,7 @@ fun ProfileTechniciansScreen(
         TopProfileTechnician(
             onNavigateBack = { onNavigateBack() },
             onSave = {},
-            onCancel = {}
+            onCancel = { onNavigateBack() }
         )
 
         BoxPersonalInformation(
