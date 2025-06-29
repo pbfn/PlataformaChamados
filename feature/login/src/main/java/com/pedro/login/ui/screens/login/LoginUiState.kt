@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.login
+package com.pedro.login.ui.screens.login
 
 data class LoginUiState(
     val email: String = "",

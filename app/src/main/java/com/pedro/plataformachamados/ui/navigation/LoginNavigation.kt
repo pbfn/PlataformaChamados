@@ -7,8 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.pedro.plataformachamados.ui.screens.login.LoginScreen
-import com.pedro.plataformachamados.ui.screens.login.LoginViewModel
+import com.pedro.login.ui.screens.login.LoginScreen
+import com.pedro.login.ui.screens.login.LoginViewModel
 import org.koin.androidx.compose.koinViewModel
 
 

@@ -2,7 +2,7 @@ package com.pedro.plataformachamados.ui.screens.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pedro.plataformachamados.ui.utils.isValidEmail
+import com.pedro.design_system.ui.utils.isValidEmail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

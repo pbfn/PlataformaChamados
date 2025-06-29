@@ -24,3 +24,4 @@ include(":app")
 
 include(":core:auth")
 include(":core:design_system")
+include(":feature:login")

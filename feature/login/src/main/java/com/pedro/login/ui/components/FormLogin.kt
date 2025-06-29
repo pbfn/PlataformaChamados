@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.login
+package com.pedro.login.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -45,7 +45,7 @@ fun FormLogin(
     val focusManager = LocalFocusManager.current
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
 
             .clip(RoundedCornerShape(10.dp))

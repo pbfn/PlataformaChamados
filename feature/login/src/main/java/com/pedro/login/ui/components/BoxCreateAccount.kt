@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.login
+package com.pedro.login.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

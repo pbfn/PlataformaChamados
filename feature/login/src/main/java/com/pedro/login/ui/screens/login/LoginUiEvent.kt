@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.login
+package com.pedro.login.ui.screens.login
 
 sealed class LoginUiEvent {
     data class OnEmailChanged(val email: String) : LoginUiEvent()

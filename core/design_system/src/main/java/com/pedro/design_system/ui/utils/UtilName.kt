@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.utils
+package com.pedro.design_system.ui.utils
 
 fun getTwoInitialsAlways(name: String): String {
     val nomes = name.trim()

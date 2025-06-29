@@ -30,7 +30,7 @@ import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.Gray600
 import com.pedro.design_system.ui.theme.CustomTypography
-import com.pedro.plataformachamados.ui.utils.getTwoInitialsAlways
+import com.pedro.design_system.ui.utils.getTwoInitialsAlways
 
 @Composable
 fun ItemBoxTechnician(
