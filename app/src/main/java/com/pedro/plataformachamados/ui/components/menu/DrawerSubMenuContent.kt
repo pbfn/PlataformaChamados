@@ -16,12 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.ui.theme.BlueDark
-import com.pedro.plataformachamados.ui.theme.FeedbackDanger
-import com.pedro.plataformachamados.ui.theme.Gray100
-import com.pedro.plataformachamados.ui.theme.Gray400
-import com.pedro.plataformachamados.ui.theme.Gray600
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.theme.BlueDark
+import com.pedro.design_system.ui.theme.FeedbackDanger
+import com.pedro.design_system.ui.theme.Gray100
+import com.pedro.design_system.ui.theme.Gray400
+import com.pedro.design_system.ui.theme.Gray600
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 fun DrawerSubMenuContent(
@@ -36,7 +36,7 @@ fun DrawerSubMenuContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        Text(text = title.uppercase(), style = TypographyPersonalizada.textXxs, color = Gray400)
+        Text(text = title.uppercase(), style = CustomTypography.textXxs, color = Gray400)
 
         Column {
             listItemsMenu.forEach { item ->
@@ -47,7 +47,7 @@ fun DrawerSubMenuContent(
 
                 NavigationDrawerItem(
                     modifier = Modifier.height(40.dp),
-                    label = { Text(text = item.title, style = TypographyPersonalizada.textSm) },
+                    label = { Text(text = item.title, style = CustomTypography.textSm) },
                     selected = isSelected,
                     shape = RoundedCornerShape(5.dp),
                     onClick = { onSelectedItem(item.type) },

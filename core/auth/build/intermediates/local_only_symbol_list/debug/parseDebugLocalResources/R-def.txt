@@ -1,2 +1,31 @@
 R_DEF: Internal format may change without notice
 local
+drawable arrow_left
+drawable ban
+drawable briefcase_business
+drawable check
+drawable chevron_down
+drawable chevron_right
+drawable circle_alert
+drawable circle_check
+drawable circle_check_big
+drawable circle_help
+drawable circle_user
+drawable clipboard_list
+drawable clock_2
+drawable eye
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable log
+drawable login_background
+drawable logo_favicon
+drawable logo_icondark
+drawable logo_iconlight
+drawable menu
+drawable pen_line
+drawable plus
+drawable trash
+drawable upload
+drawable users
+drawable wrench
+drawable x

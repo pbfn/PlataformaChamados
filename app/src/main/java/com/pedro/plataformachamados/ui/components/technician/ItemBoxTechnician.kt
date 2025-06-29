@@ -21,15 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pedro.plataformachamados.R
 import com.pedro.plataformachamados.data.model.Technician
-import com.pedro.plataformachamados.ui.components.buttons.CustomButton
-import com.pedro.plataformachamados.ui.components.buttons.SizeCustomButton
-import com.pedro.plataformachamados.ui.components.buttons.TypeCustomButton
-import com.pedro.plataformachamados.ui.components.tags.TagTime
-import com.pedro.plataformachamados.ui.theme.BlueDark
-import com.pedro.plataformachamados.ui.theme.Gray200
-import com.pedro.plataformachamados.ui.theme.Gray500
-import com.pedro.plataformachamados.ui.theme.Gray600
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.buttons.CustomButton
+import com.pedro.design_system.ui.components.buttons.SizeCustomButton
+import com.pedro.design_system.ui.components.buttons.TypeCustomButton
+import com.pedro.design_system.ui.components.tags.TagTime
+import com.pedro.design_system.ui.theme.BlueDark
+import com.pedro.design_system.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray500
+import com.pedro.design_system.ui.theme.Gray600
+import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.plataformachamados.ui.utils.getTwoInitialsAlways
 
 @Composable
@@ -59,14 +59,14 @@ fun ItemBoxTechnician(
             ) {
                 Text(
                     getTwoInitialsAlways(technician.name),
-                    style = TypographyPersonalizada.textSm.copy(fontSize = 12.25.sp),
+                    style = CustomTypography.textSm.copy(fontSize = 12.25.sp),
                     color = Gray600
                 )
             }
 
             Text(
                 text = technician.name,
-                style = TypographyPersonalizada.textSm.copy(
+                style = CustomTypography.textSm.copy(
                     fontWeight = FontWeight.Bold,
                     color = Gray200
                 ),

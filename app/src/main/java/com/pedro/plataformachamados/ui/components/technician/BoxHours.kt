@@ -8,9 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.ui.components.tags.TagTime
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.tags.TagTime
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 @OptIn(ExperimentalLayoutApi::class)
@@ -23,7 +23,7 @@ fun BoxHours(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
             text = title.uppercase(),
-            style = TypographyPersonalizada.textXxs.copy(color = Gray300)
+            style = CustomTypography.textXxs.copy(color = Gray300)
         )
 
         FlowRow(

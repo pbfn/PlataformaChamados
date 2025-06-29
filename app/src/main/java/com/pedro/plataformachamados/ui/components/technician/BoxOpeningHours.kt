@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.ui.components.CustomBoxWithBorder
-import com.pedro.plataformachamados.ui.theme.Gray200
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.CustomBoxWithBorder
+import com.pedro.design_system.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 fun BoxOpeningHours(
@@ -26,12 +26,12 @@ fun BoxOpeningHours(
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Horários de atendimento",
-                style = TypographyPersonalizada.textLg,
+                style = CustomTypography.textLg,
                 color = Gray200
             )
             Text(
                 text = "Selecione os horários de disponibilidade do técnico para atendimento",
-                style = TypographyPersonalizada.textXs,
+                style = CustomTypography.textXs,
                 color = Gray300
             )
         }

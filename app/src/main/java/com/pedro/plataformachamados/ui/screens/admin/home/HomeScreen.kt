@@ -22,12 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.pedro.design_system.ui.components.topappbar.TopAppBarCustom
 import com.pedro.plataformachamados.R
 import com.pedro.plataformachamados.ui.components.menu.DrawerMenuContent
 import com.pedro.plataformachamados.ui.components.menu.DrawerSubMenuContent
 import com.pedro.plataformachamados.ui.components.menu.ItemMenuDrawer
 import com.pedro.plataformachamados.ui.components.menu.TypeItemMenuDrawer
-import com.pedro.plataformachamados.ui.components.topappbar.TopAppBarCustom
 import com.pedro.plataformachamados.ui.navigation.admin.addTechnicianScreen
 import com.pedro.plataformachamados.ui.navigation.admin.drawerHomeAdmGraph
 import com.pedro.plataformachamados.ui.navigation.admin.drawerHomeAdmGraphRoute
@@ -35,8 +35,8 @@ import com.pedro.plataformachamados.ui.navigation.admin.navigateToAddTechnicianS
 import com.pedro.plataformachamados.ui.navigation.admin.navigateToServicesScreen
 import com.pedro.plataformachamados.ui.navigation.admin.navigateToTechnicianScreen
 import com.pedro.plataformachamados.ui.navigation.admin.navigateToTicketsScreen
-import com.pedro.plataformachamados.ui.theme.Gray100
-import com.pedro.plataformachamados.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray100
+import com.pedro.design_system.ui.theme.Gray200
 import kotlinx.coroutines.launch
 
 @Composable

@@ -19,14 +19,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.ui.components.buttons.CustomButton
-import com.pedro.plataformachamados.ui.components.buttons.SizeCustomButton
-import com.pedro.plataformachamados.ui.components.buttons.TypeCustomButton
-import com.pedro.plataformachamados.ui.components.texfields.CustomTextField
-import com.pedro.plataformachamados.ui.theme.Gray200
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.Gray500
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.buttons.CustomButton
+import com.pedro.design_system.ui.components.buttons.SizeCustomButton
+import com.pedro.design_system.ui.components.buttons.TypeCustomButton
+import com.pedro.design_system.ui.components.texfields.CustomTextField
+import com.pedro.design_system.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.Gray500
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 fun FormRegister(
@@ -64,12 +64,12 @@ fun FormRegister(
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Crie sua conta",
-                    style = TypographyPersonalizada.textLg,
+                    style = CustomTypography.textLg,
                     color = Gray200
                 )
                 Text(
                     text = "Informe seu nome, e-mail e senha",
-                    style = TypographyPersonalizada.textXs,
+                    style = CustomTypography.textXs,
                     color = Gray300
                 )
             }

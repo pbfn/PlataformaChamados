@@ -1,10 +1,8 @@
 package com.pedro.plataformachamados
 
 import android.app.Application
-import com.google.firebase.FirebaseApp
 import com.pedro.plataformachamados.di.viewModelModule
 import di.provideFirebaseModule
-import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

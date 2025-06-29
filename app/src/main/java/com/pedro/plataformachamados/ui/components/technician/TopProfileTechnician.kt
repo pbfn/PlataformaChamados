@@ -15,12 +15,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.ui.components.buttons.CustomButton
-import com.pedro.plataformachamados.ui.components.buttons.SizeCustomButton
-import com.pedro.plataformachamados.ui.components.buttons.TypeCustomButton
-import com.pedro.plataformachamados.ui.theme.BlueDark
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.buttons.CustomButton
+import com.pedro.design_system.ui.components.buttons.SizeCustomButton
+import com.pedro.design_system.ui.components.buttons.TypeCustomButton
+import com.pedro.design_system.ui.theme.BlueDark
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 fun TopProfileTechnician(
@@ -50,12 +50,12 @@ fun TopProfileTechnician(
 
                 Text(
                     text = "Voltar",
-                    style = TypographyPersonalizada.textXxs.copy(color = Gray300)
+                    style = CustomTypography.textXxs.copy(color = Gray300)
                 )
             }
             Text(
                 text = "Perfil de técnico",
-                style = TypographyPersonalizada.textLg.copy(color = BlueDark)
+                style = CustomTypography.textLg.copy(color = BlueDark)
             )
         }
 

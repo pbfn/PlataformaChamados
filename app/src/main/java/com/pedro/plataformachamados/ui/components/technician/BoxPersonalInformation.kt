@@ -19,13 +19,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pedro.plataformachamados.ui.components.CustomBoxWithBorder
-import com.pedro.plataformachamados.ui.components.texfields.CustomTextField
-import com.pedro.plataformachamados.ui.theme.BlueDark
-import com.pedro.plataformachamados.ui.theme.Gray200
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.Gray600
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.CustomBoxWithBorder
+import com.pedro.design_system.ui.components.texfields.CustomTextField
+import com.pedro.design_system.ui.theme.BlueDark
+import com.pedro.design_system.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.Gray600
+import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.plataformachamados.ui.utils.getTwoInitialsAlways
 
 @Composable
@@ -49,12 +49,12 @@ fun BoxPersonalInformation(
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Dados pessoais",
-                style = TypographyPersonalizada.textLg,
+                style = CustomTypography.textLg,
                 color = Gray200
             )
             Text(
                 text = "Defina as informações do perfil técnico",
-                style = TypographyPersonalizada.textXs,
+                style = CustomTypography.textXs,
                 color = Gray300
             )
         }
@@ -72,7 +72,7 @@ fun BoxPersonalInformation(
                 ) {
                     Text(
                         getTwoInitialsAlways(name),
-                        style = TypographyPersonalizada.textSm.copy(fontSize = 21.sp),
+                        style = CustomTypography.textSm.copy(fontSize = 21.sp),
                         color = Gray600
                     )
                 }

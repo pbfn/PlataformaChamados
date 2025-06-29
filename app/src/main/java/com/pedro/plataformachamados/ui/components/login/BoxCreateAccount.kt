@@ -14,13 +14,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.ui.components.buttons.CustomButton
-import com.pedro.plataformachamados.ui.components.buttons.SizeCustomButton
-import com.pedro.plataformachamados.ui.components.buttons.TypeCustomButton
-import com.pedro.plataformachamados.ui.theme.Gray200
-import com.pedro.plataformachamados.ui.theme.Gray300
-import com.pedro.plataformachamados.ui.theme.Gray500
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.components.buttons.CustomButton
+import com.pedro.design_system.ui.components.buttons.SizeCustomButton
+import com.pedro.design_system.ui.components.buttons.TypeCustomButton
+import com.pedro.design_system.ui.theme.CustomTypography
+import com.pedro.design_system.ui.theme.Gray200
+import com.pedro.design_system.ui.theme.Gray300
+import com.pedro.design_system.ui.theme.Gray500
 
 @Composable
 fun BoxCreateAccount(
@@ -40,12 +40,12 @@ fun BoxCreateAccount(
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     "Ainda não tem uma conta",
-                    style = TypographyPersonalizada.headingMd.copy(fontWeight = FontWeight.Bold),
+                    style = CustomTypography.headingMd.copy(fontWeight = FontWeight.Bold),
                     color = Gray200
                 )
                 Text(
                     "Cadastre agora mesmo",
-                    style = TypographyPersonalizada.textXs,
+                    style = CustomTypography.textXs,
                     color = Gray300
                 )
             }

@@ -65,7 +65,7 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.kotlin.serialization)
 
-    implementation(libs.firebase.auth)
 
     implementation(project(":core:auth"))
+    implementation(project(":core:design_system"))
 }

@@ -17,9 +17,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.plataformachamados.data.model.Technician
-import com.pedro.plataformachamados.ui.theme.Gray400
-import com.pedro.plataformachamados.ui.theme.Gray500
-import com.pedro.plataformachamados.ui.theme.TypographyPersonalizada
+import com.pedro.design_system.ui.theme.Gray400
+import com.pedro.design_system.ui.theme.Gray500
+import com.pedro.design_system.ui.theme.CustomTypography
 
 @Composable
 fun BoxTechnicians(listTechnicians: List<Technician>) {
@@ -39,7 +39,7 @@ fun BoxTechnicians(listTechnicians: List<Technician>) {
             ) {
                 Text(
                     text = "Nome",
-                    style = TypographyPersonalizada.textSm.copy(
+                    style = CustomTypography.textSm.copy(
                         color = Gray400,
                         fontWeight = FontWeight.Bold,
                     ),
@@ -49,7 +49,7 @@ fun BoxTechnicians(listTechnicians: List<Technician>) {
                 )
                 Text(
                     text = "Disponibilidade",
-                    style = TypographyPersonalizada.textSm.copy(
+                    style = CustomTypography.textSm.copy(
                         color = Gray400,
                         fontWeight = FontWeight.Bold
                     ),
