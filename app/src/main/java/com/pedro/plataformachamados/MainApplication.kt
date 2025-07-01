@@ -2,6 +2,7 @@ package com.pedro.plataformachamados
 
 import android.app.Application
 import com.pedro.plataformachamados.di.viewModelModule
+import com.pedro.technicians.di.provideTechniciansModules
 import di.provideFirebaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,6 +19,7 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             modules(
                 provideFirebaseModule(),
+                provideTechniciansModules(),
                 viewModelModule,
             )
         }

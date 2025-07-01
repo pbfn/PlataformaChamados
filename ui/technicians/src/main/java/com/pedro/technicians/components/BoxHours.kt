@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

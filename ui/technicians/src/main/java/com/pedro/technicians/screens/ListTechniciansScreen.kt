@@ -1,30 +1,32 @@
-package com.pedro.plataformachamados.ui.screens.admin.technicians.list
+package com.pedro.technicians.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.data.model.Technician
+import com.pedro.design_system.R
 import com.pedro.design_system.ui.components.buttons.CustomButton
 import com.pedro.design_system.ui.components.buttons.SizeCustomButton
 import com.pedro.design_system.ui.components.buttons.TypeCustomButton
-import com.pedro.plataformachamados.ui.components.technician.BoxTechnicians
 import com.pedro.design_system.ui.theme.BlueDark
 import com.pedro.design_system.ui.theme.CustomTypography
+import com.pedro.technicians.components.BoxTechnicians
+import com.pedro.technicians.model.TechnicianUI
+import com.pedro.technicians.states.ListTechniciansUiState
 
 
 @Composable
-fun TechnicianScreen(
+fun ListTechniciansScreen(
     modifier: Modifier = Modifier,
-    onClickAddTechnician: () -> Unit
+    state: ListTechniciansUiState,
+    onClickAddTechnician: () -> Unit,
+    onClickEditTechnician: (TechnicianUI) -> Unit
 ) {
 
     Column(
@@ -50,33 +52,8 @@ fun TechnicianScreen(
         }
 
         BoxTechnicians(
-            listTechnicians = listOf(
-                Technician(
-                    name = "Pedro Bruno",
-                    availabilities = listOf("08:00", "10:00", "13:00", "15:00")
-                ),
-                Technician(
-                    name = "Rebeca Nantes",
-                    availabilities = listOf(
-                        "10:00",
-                        "11:00",
-                        "13:00",
-                        "15:00",
-                        "18:00",
-                        "21:00",
-                        "22:00"
-                    )
-                ),
-
-                Technician(
-                    name = "João Paulo",
-                    availabilities = listOf("15:00", "18:00", "21:00", "22:00")
-                ),
-                Technician(
-                    name = "Ricardo",
-                    availabilities = listOf("16:00")
-                ),
-            )
+            listTechnicians = state.listTechnicians,
+            onClickEditTechnician = onClickEditTechnician,
         )
     }
 }
@@ -85,7 +62,9 @@ fun TechnicianScreen(
 @Preview(showBackground = true)
 @Composable
 private fun TechnicianScreenPreview() {
-    TechnicianScreen(
-        onClickAddTechnician = {}
+    ListTechniciansScreen(
+        onClickAddTechnician = {},
+        onClickEditTechnician = {},
+        state = ListTechniciansUiState()
     )
 }

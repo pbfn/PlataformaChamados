@@ -1,17 +1,25 @@
 package com.pedro.plataformachamados.ui.navigation.admin
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.pedro.plataformachamados.ui.screens.admin.technicians.list.TechnicianScreen
+import com.pedro.technicians.screens.ListTechniciansScreen
+import com.pedro.technicians.viewmodel.ListTechniciansViewModel
+import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.technicianScreen(
     onNavigateToAddTechnician: () -> Unit
-){
+) {
     composable(DrawerHomeAdminDestinations.Technicians.route) {
-        TechnicianScreen(
-            onClickAddTechnician = onNavigateToAddTechnician
+        val viewModel = koinViewModel<ListTechniciansViewModel>()
+        val state by viewModel.state.collectAsState()
+        ListTechniciansScreen(
+            onClickAddTechnician = onNavigateToAddTechnician,
+            onClickEditTechnician = {},
+            state = state,
         )
     }
 }

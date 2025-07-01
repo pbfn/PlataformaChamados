@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,8 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pedro.plataformachamados.R
-import com.pedro.plataformachamados.data.model.Technician
+import com.pedro.design_system.R
 import com.pedro.design_system.ui.components.buttons.CustomButton
 import com.pedro.design_system.ui.components.buttons.SizeCustomButton
 import com.pedro.design_system.ui.components.buttons.TypeCustomButton
@@ -31,10 +30,12 @@ import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.Gray600
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.utils.getTwoInitialsAlways
+import com.pedro.technicians.model.TechnicianUI
 
 @Composable
 fun ItemBoxTechnician(
-    technician: Technician
+    technician: TechnicianUI,
+    onClickEditTechnician: (TechnicianUI) -> Unit,
 ) {
 
     HorizontalDivider(color = Gray500)
@@ -113,7 +114,7 @@ fun ItemBoxTechnician(
                 sizeCustomButton = SizeCustomButton.Small,
                 iconRes = R.drawable.pen_line,
                 onClick = {
-
+                    onClickEditTechnician(technician)
                 }
             )
         }
@@ -126,9 +127,10 @@ fun ItemBoxTechnician(
 @Composable
 private fun ItemBoxTechnicianPreview() {
     ItemBoxTechnician(
-        technician = Technician(
+        technician = TechnicianUI(
             name = "Pedro Bruno",
             availabilities = listOf("08:00", "10:00", "13:00", "15:00")
-        )
+        ),
+        onClickEditTechnician = {}
     )
 }

@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.screens.admin.technicians.profile
+package com.pedro.technicians.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,34 +11,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.ui.components.technician.BoxOpeningHours
-import com.pedro.plataformachamados.ui.components.technician.BoxPersonalInformation
-import com.pedro.plataformachamados.ui.components.technician.TopProfileTechnician
+import com.pedro.technicians.components.BoxOpeningHours
+import com.pedro.technicians.components.BoxPersonalInformation
+import com.pedro.technicians.components.TopProfileTechnician
+import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
+import com.pedro.technicians.states.profile.BoxPersonalDataUiState
+import com.pedro.technicians.states.profile.ProfileUiState
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ProfileTechniciansScreen(
+fun ProfileScreen(
     modifier: Modifier = Modifier,
-    isEdit: Boolean,
+    state: ProfileUiState,
     onNavigateBack: () -> Unit,
-    name: String,
     onNameChanged: (String) -> Unit,
-    helperTextName: String,
-    nameHasError: Boolean,
-    email: String,
     onEmailChanged: (String) -> Unit,
-    helperTextEmail: String,
-    emailHasError: Boolean,
-    password: String,
     onPasswordChanged: (String) -> Unit,
-    helperTextPassword: String,
-    passwordHasError: Boolean,
-    listMorningHours: List<String>,
-    listMorningSelected: List<String>,
-    listAfternoonHours: List<String>,
-    listAfternoonSelected: List<String>,
-    listNightHours: List<String>,
-    listNightSelected: List<String>,
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -57,30 +45,14 @@ fun ProfileTechniciansScreen(
         )
 
         BoxPersonalInformation(
-            isEdit,
-            name,
+            state.boxPersonalDataUiState,
             onNameChanged,
-            helperTextName,
-            nameHasError,
             focusManager,
             onEmailChanged,
-            helperTextEmail,
-            email,
-            emailHasError,
             onPasswordChanged,
-            helperTextPassword,
-            password,
-            passwordHasError
         )
 
-        BoxOpeningHours(
-            listMorningHours,
-            listMorningSelected,
-            listAfternoonHours,
-            listAfternoonSelected,
-            listNightHours,
-            listNightSelected
-        )
+        BoxOpeningHours(state.boxOpeningHoursUiState)
 
     }
 }
@@ -94,27 +66,25 @@ private fun ProfileTechniciansScreenPreview() {
     val listNightHours = listOf<String>("19:00", "20:00", "21:00", "22:00", "23:00")
 
 
-    ProfileTechniciansScreen(
-        isEdit = false,
+    ProfileScreen(
+        state = ProfileUiState(
+            boxPersonalDataUiState = BoxPersonalDataUiState(
+                isEdit = false,
+                helperTextPassword = "Mínimo de 6 dígitos",
+            ),
+            boxOpeningHoursUiState = BoxOpeningHoursUiState(
+                listMorningHours = listMorningHours,
+                listMorningSelected = emptyList(),
+                listAfternoonHours = listAfternoonHours,
+                listAfternoonSelected = emptyList(),
+                listNightHours = listNightHours,
+                listNightSelected = emptyList(),
+            )
+        ),
         onNavigateBack = {},
-        name = "",
         onNameChanged = { },
-        helperTextName = "",
-        nameHasError = false,
-        email = "",
         onEmailChanged = {},
-        helperTextEmail = "",
-        emailHasError = false,
-        password = "",
         onPasswordChanged = {},
-        helperTextPassword = "Mínimo de 6 dígitos",
-        passwordHasError = false,
-        listMorningHours = listMorningHours,
-        listMorningSelected = emptyList(),
-        listAfternoonHours = listAfternoonHours,
-        listAfternoonSelected = emptyList(),
-        listNightHours = listNightHours,
-        listNightSelected = emptyList(),
     )
 }
 
@@ -130,26 +100,24 @@ private fun ProfileTechniciansScreenPreview1() {
 
     val listNightHours = listOf<String>("19:00", "20:00", "21:00", "22:00", "23:00")
     val listNightSelected = listOf<String>("23:00")
-    ProfileTechniciansScreen(
-        isEdit = true,
+    ProfileScreen(
+        state = ProfileUiState(
+            boxPersonalDataUiState = BoxPersonalDataUiState(
+                isEdit = true,
+                helperTextPassword = "Mínimo de 6 dígitos",
+            ),
+            boxOpeningHoursUiState = BoxOpeningHoursUiState(
+                listMorningHours = listMorningHours,
+                listMorningSelected = listMorningSelected,
+                listAfternoonHours = listAfternoonHours,
+                listAfternoonSelected = listAfternoonSelected,
+                listNightHours = listNightHours,
+                listNightSelected = listNightSelected,
+            )
+        ),
         onNavigateBack = {},
-        name = "Pedro Bruno Fernandes",
         onNameChanged = { },
-        helperTextName = "",
-        nameHasError = false,
-        email = "pedro.bruno@test.com",
         onEmailChanged = {},
-        helperTextEmail = "",
-        emailHasError = false,
-        password = "",
         onPasswordChanged = {},
-        helperTextPassword = "Mínimo de 6 dígitos",
-        passwordHasError = false,
-        listMorningHours = listMorningHours,
-        listMorningSelected = listMorningSelected,
-        listAfternoonHours = listAfternoonHours,
-        listAfternoonSelected = listAfternoonSelected,
-        listNightHours = listNightHours,
-        listNightSelected = listNightSelected,
     )
 }

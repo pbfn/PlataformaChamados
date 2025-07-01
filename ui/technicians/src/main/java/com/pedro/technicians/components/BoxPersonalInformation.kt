@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,23 +27,15 @@ import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.Gray600
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.utils.getTwoInitialsAlways
+import com.pedro.technicians.states.profile.BoxPersonalDataUiState
 
 @Composable
 fun BoxPersonalInformation(
-    isEdit: Boolean,
-    name: String,
+    state: BoxPersonalDataUiState,
     onNameChanged: (String) -> Unit,
-    helperTextName: String,
-    nameHasError: Boolean,
     focusManager: FocusManager,
     onEmailChanged: (String) -> Unit,
-    helperTextEmail: String,
-    email: String,
-    emailHasError: Boolean,
     onPasswordChanged: (String) -> Unit,
-    helperTextPassword: String,
-    password: String,
-    passwordHasError: Boolean
 ) {
     CustomBoxWithBorder {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -63,7 +55,7 @@ fun BoxPersonalInformation(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (isEdit) {
+            if (state.isEdit) {
                 Box(
                     modifier = Modifier
                         .background(color = BlueDark, shape = RoundedCornerShape(50))
@@ -71,7 +63,7 @@ fun BoxPersonalInformation(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        getTwoInitialsAlways(name),
+                        getTwoInitialsAlways(state.name),
                         style = CustomTypography.textSm.copy(fontSize = 21.sp),
                         color = Gray600
                     )
@@ -81,11 +73,11 @@ fun BoxPersonalInformation(
                 onTextChanged = {
                     onNameChanged(it)
                 },
-                helperText = helperTextName,
+                helperText = state.helperTextName,
                 placeholder = "Digite o nome completo",
-                text = name,
+                text = state.name,
                 label = "NOME",
-                isError = nameHasError,
+                isError = state.nameHasError,
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Next
                 ),
@@ -100,11 +92,11 @@ fun BoxPersonalInformation(
                 onTextChanged = {
                     onEmailChanged(it)
                 },
-                helperText = helperTextEmail,
+                helperText = state.helperTextEmail,
                 placeholder = "exemplo@mail.com",
-                text = email,
+                text = state.email,
                 label = "E-MAIL",
-                isError = emailHasError,
+                isError = state.emailHasError,
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Next
                 ),
@@ -115,16 +107,16 @@ fun BoxPersonalInformation(
                 ),
             )
 
-            if (!isEdit) {
+            if (!state.isEdit) {
                 CustomTextField(
                     onTextChanged = {
                         onPasswordChanged(it)
                     },
-                    helperText = helperTextPassword,
+                    helperText = state.helperTextPassword,
                     placeholder = "Defina a senha de acesso",
-                    text = password,
+                    text = state.password,
                     label = "Senha",
-                    isError = passwordHasError,
+                    isError = state.passwordHasError,
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = ImeAction.Done
@@ -132,7 +124,6 @@ fun BoxPersonalInformation(
                     keyboardActions = KeyboardActions(
                         onDone = {
                             focusManager.clearFocus()
-
                         }
                     ),
                 )

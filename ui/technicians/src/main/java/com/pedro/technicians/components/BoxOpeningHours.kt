@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,15 +12,11 @@ import com.pedro.design_system.ui.components.CustomBoxWithBorder
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.CustomTypography
+import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
 
 @Composable
 fun BoxOpeningHours(
-    listMorningHours: List<String>,
-    listMorningSelected: List<String>,
-    listAfternoonHours: List<String>,
-    listAfternoonSelected: List<String>,
-    listNightHours: List<String>,
-    listNightSelected: List<String>
+    state: BoxOpeningHoursUiState
 ) {
     CustomBoxWithBorder {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -39,20 +35,20 @@ fun BoxOpeningHours(
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             BoxHours(
                 title = "Manhã",
-                listHours = listMorningHours,
-                listSelectedHour = listMorningSelected,
+                listHours = state.listMorningHours,
+                listSelectedHour = state.listMorningSelected,
                 onSelectedHour = {},
             )
             BoxHours(
                 title = "Tarde",
-                listHours = listAfternoonHours,
-                listSelectedHour = listAfternoonSelected,
+                listHours = state.listAfternoonHours,
+                listSelectedHour = state.listAfternoonSelected,
                 onSelectedHour = {},
             )
             BoxHours(
                 title = "Noite",
-                listHours = listNightHours,
-                listSelectedHour = listNightSelected,
+                listHours = state.listNightHours,
+                listSelectedHour = state.listNightSelected,
                 onSelectedHour = {},
             )
         }
@@ -66,12 +62,14 @@ private fun BoxOpeningHoursPreview() {
     val listAfternoonHours = listOf<String>("13:00", "14:00", "15:00", "16:00", "17:00", "18:00")
     val listNightHours = listOf<String>("19:00", "20:00", "21:00", "22:00", "23:00")
     BoxOpeningHours(
-        listMorningHours,
-        emptyList(),
-        listAfternoonHours,
-        emptyList(),
-        listNightHours,
-        emptyList()
+        state = BoxOpeningHoursUiState(
+            listMorningHours = listMorningHours,
+            listMorningSelected = emptyList(),
+            listAfternoonHours = listAfternoonHours,
+            listAfternoonSelected = emptyList(),
+            listNightHours = listNightHours,
+            listNightSelected = emptyList()
+        )
     )
 }
 
@@ -87,11 +85,13 @@ private fun BoxOpeningHoursPreview1() {
     val listNightHours = listOf<String>("19:00", "20:00", "21:00", "22:00", "23:00")
     val listNightSelected = listOf<String>("23:00")
     BoxOpeningHours(
-        listMorningHours,
-        listMorningSelected,
-        listAfternoonHours,
-        listAfternoonSelected,
-        listNightHours,
-        listNightSelected
+        state = BoxOpeningHoursUiState(
+            listMorningHours = listMorningHours,
+            listMorningSelected = listMorningSelected,
+            listAfternoonHours = listAfternoonHours,
+            listAfternoonSelected = listAfternoonSelected,
+            listNightHours = listNightHours,
+            listNightSelected = listNightSelected
+        )
     )
 }

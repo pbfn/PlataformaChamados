@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -16,13 +16,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.data.model.Technician
 import com.pedro.design_system.ui.theme.Gray400
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.CustomTypography
+import com.pedro.technicians.model.TechnicianUI
 
 @Composable
-fun BoxTechnicians(listTechnicians: List<Technician>) {
+fun BoxTechnicians(
+    listTechnicians: List<TechnicianUI>,
+    onClickEditTechnician: (TechnicianUI) -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +63,7 @@ fun BoxTechnicians(listTechnicians: List<Technician>) {
             }
 
             listTechnicians.forEach { technician ->
-                ItemBoxTechnician(technician)
+                ItemBoxTechnician(technician, onClickEditTechnician = onClickEditTechnician)
             }
 
         }
@@ -72,11 +75,11 @@ fun BoxTechnicians(listTechnicians: List<Technician>) {
 private fun BoxTechniciansPreview() {
     BoxTechnicians(
         listTechnicians = listOf(
-            Technician(
+            TechnicianUI(
                 name = "Pedro Bruno",
                 availabilities = listOf("08:00", "10:00", "13:00", "15:00")
             ),
-            Technician(
+            TechnicianUI(
                 name = "Rebeca Nantes",
                 availabilities = listOf(
                     "10:00",
@@ -88,15 +91,15 @@ private fun BoxTechniciansPreview() {
                     "22:00"
                 )
             ),
-
-            Technician(
+            TechnicianUI(
                 name = "João Paulo",
                 availabilities = listOf("15:00", "18:00", "21:00", "22:00")
             ),
-            Technician(
+            TechnicianUI(
                 name = "Ricardo",
                 availabilities = listOf("16:00")
             ),
-        )
+        ),
+        onClickEditTechnician = {}
     )
 }

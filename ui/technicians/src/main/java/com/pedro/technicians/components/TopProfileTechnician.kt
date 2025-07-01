@@ -1,4 +1,4 @@
-package com.pedro.plataformachamados.ui.components.technician
+package com.pedro.technicians.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pedro.plataformachamados.R
+import com.pedro.design_system.R
 import com.pedro.design_system.ui.components.buttons.CustomButton
 import com.pedro.design_system.ui.components.buttons.SizeCustomButton
 import com.pedro.design_system.ui.components.buttons.TypeCustomButton
