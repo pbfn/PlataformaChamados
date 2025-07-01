@@ -128,6 +128,7 @@ fun ItemBoxTechnician(
 private fun ItemBoxTechnicianPreview() {
     ItemBoxTechnician(
         technician = TechnicianUI(
+            id = 1,
             name = "Pedro Bruno",
             availabilities = listOf("08:00", "10:00", "13:00", "15:00")
         ),
