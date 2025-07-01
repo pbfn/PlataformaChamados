@@ -171,14 +171,23 @@ fun HomeScreen(
 
                     drawerHomeAdmGraph(
                         onNavigateToAddTechnician = {
-                            navController.navigateToAddTechnicianScreen()
+                            navController.navigateToAddTechnicianScreen(
+                                isEditing = false,
+                                technicianSelected = null
+                            )
+                        },
+                        onNavigateToEditTechnician = {
+                            navController.navigateToAddTechnicianScreen(
+                                isEditing = true,
+                                technicianSelected = it
+                            )
                         }
                     )
 
                     addTechnicianScreen(
                         onPopBackStack = {
                             navController.popBackStack()
-                        }
+                        },
                     )
 
                 }

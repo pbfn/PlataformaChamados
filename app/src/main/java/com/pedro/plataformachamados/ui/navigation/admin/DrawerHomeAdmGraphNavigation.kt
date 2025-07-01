@@ -5,11 +5,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.navigation
 import androidx.navigation.navOptions
+import com.pedro.technicians.model.TechnicianUI
 
 const val drawerHomeAdmGraphRoute = "drawerHomeAdmGraph"
 
 fun NavGraphBuilder.drawerHomeAdmGraph(
-    onNavigateToAddTechnician: () -> Unit
+    onNavigateToAddTechnician: () -> Unit,
+    onNavigateToEditTechnician: (TechnicianUI) -> Unit
 ) {
     navigation(
         route = drawerHomeAdmGraphRoute,
@@ -19,7 +21,10 @@ fun NavGraphBuilder.drawerHomeAdmGraph(
         ticketsScreen()
 
         technicianScreen(
-            onNavigateToAddTechnician = onNavigateToAddTechnician
+            onNavigateToAddTechnician = onNavigateToAddTechnician,
+            onNavigateToEditTechnician = { technician ->
+                onNavigateToEditTechnician(technician)
+            }
         )
 
         servicesScreen()
