@@ -19,7 +19,7 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             modules(
                 provideFirebaseModule(),
-                provideTechniciansModules(),
+                *provideTechniciansModules().toTypedArray(),
                 viewModelModule,
             )
         }

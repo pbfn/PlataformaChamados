@@ -55,4 +55,5 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     implementation(project(":core:design_system"))
+    implementation(project(":domain:technicians"))
 }

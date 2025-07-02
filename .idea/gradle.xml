@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/core/design_system" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/technicians" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/technicians" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/register_user" />

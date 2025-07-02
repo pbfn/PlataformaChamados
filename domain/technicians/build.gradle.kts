@@ -42,4 +42,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.koin.androidx.compose)
+
+    implementation(project(":data:technicians"))
+
 }
