@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,8 +15,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.technicians.components.BoxOpeningHours
+import com.pedro.technicians.components.BoxOpeningHoursSkeleton
 import com.pedro.technicians.components.BoxPersonalInformation
+import com.pedro.technicians.components.BoxPersonalInformationSkeleton
 import com.pedro.technicians.components.TopProfileTechnician
+import com.pedro.technicians.components.TopProfileTechnicianSkeleton
 import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
 import com.pedro.technicians.states.profile.BoxPersonalDataUiState
 import com.pedro.technicians.states.profile.ProfileUiState
@@ -35,28 +37,26 @@ fun ProfileScreen(
 
     val focusManager = LocalFocusManager.current
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-
-        TopProfileTechnician(
-            onNavigateBack = { onNavigateBack() },
-            onSave = {},
-            onCancel = { onNavigateBack() }
-        )
-
-        when (state) {
-            is ProfileUiState.Error -> TODO()
-            ProfileUiState.Loading -> {
-                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
+    when (state) {
+        is ProfileUiState.Error -> {}
+        ProfileUiState.Loading -> {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                ProfileScreenSkeleton()
             }
+        }
 
-            is ProfileUiState.Success -> {
+        is ProfileUiState.Success -> {
+            Column(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                TopProfileTechnician(
+                    onNavigateBack = { onNavigateBack() },
+                    onSave = {},
+                    onCancel = { onNavigateBack() }
+                )
                 BoxPersonalInformation(
                     state.boxPersonalDataUiState,
                     onNameChanged,
@@ -66,13 +66,32 @@ fun ProfileScreen(
                 )
 
                 BoxOpeningHours(state.boxOpeningHoursUiState)
-            }
-        }
 
+            }
+
+        }
+    }
+
+
+}
+
+@Composable
+fun ProfileScreenSkeleton(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+
+        TopProfileTechnicianSkeleton()
+
+        BoxPersonalInformationSkeleton()
+
+        BoxOpeningHoursSkeleton()
 
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

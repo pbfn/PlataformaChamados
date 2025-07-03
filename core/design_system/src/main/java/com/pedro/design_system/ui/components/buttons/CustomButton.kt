@@ -100,6 +100,7 @@ fun CustomButton(
 
 @Composable
 fun CustomButtonSkeleton(
+    modifier: Modifier = Modifier,
     sizeCustomButton: SizeCustomButton,
 ) {
     val heightIn = when (sizeCustomButton) {
@@ -109,7 +110,7 @@ fun CustomButtonSkeleton(
 
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(heightIn)
             .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(5.dp)),
     )

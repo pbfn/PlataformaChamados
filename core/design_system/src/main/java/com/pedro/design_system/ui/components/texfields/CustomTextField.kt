@@ -1,14 +1,18 @@
 package com.pedro.design_system.ui.components.texfields
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,6 +31,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.design_system.R
+import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.BlueBase
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.FeedbackDanger
@@ -128,6 +133,18 @@ fun CustomTextField(
 
 }
 
+
+@Composable
+fun CustomTextFieldSkeleton(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(5.dp))
+            .height(50.dp)
+    ) {
+    }
+}
+
 @Preview
 @Composable
 private fun CustomTextFieldPrev1() {
@@ -168,4 +185,10 @@ private fun CustomTextFieldPrev3() {
         onTextChanged = {},
         keyboardActions = KeyboardActions()
     )
+}
+
+@Preview
+@Composable
+private fun CustomTextFieldSkeletonPrev() {
+    CustomTextFieldSkeleton()
 }

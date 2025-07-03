@@ -1,14 +1,18 @@
 package com.pedro.technicians.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.design_system.ui.components.CustomBoxWithBorder
+import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.CustomTypography
@@ -51,6 +55,39 @@ fun BoxOpeningHours(
                 listSelectedHour = state.listNightSelected,
                 onSelectedHour = {},
             )
+        }
+    }
+}
+
+@Composable
+fun BoxOpeningHoursSkeleton() {
+    CustomBoxWithBorder {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                modifier = Modifier.background(
+                    brush = rememberSkeletonBrush(),
+                    RoundedCornerShape(5.dp)
+                ),
+                color = Color.Transparent,
+                text = "Horários de atendimento",
+                style = CustomTypography.textLg,
+            )
+            Text(
+                modifier = Modifier.background(
+                    brush = rememberSkeletonBrush(),
+                    RoundedCornerShape(5.dp)
+                ),
+                color = Color.Transparent,
+                text = "Selecione os horários de disponibilidade do técnico para atendimento",
+                style = CustomTypography.textXs,
+
+                )
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            BoxHoursSkeleton()
+            BoxHoursSkeleton()
+            BoxHoursSkeleton()
         }
     }
 }
