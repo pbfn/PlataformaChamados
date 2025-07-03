@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -26,12 +27,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.design_system.R
+import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.BlueBase
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray400
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.Gray600
+import com.pedro.design_system.ui.theme.SkeletonColor
 
 @Composable
 fun TagTime(
@@ -104,6 +107,41 @@ fun TagTime(
 
 }
 
+
+@Composable
+fun TagTimeSkeleton(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+
+            .height(28.dp)
+            .border(width = 1.dp, color = Color.Transparent, shape = RoundedCornerShape(999.dp))
+            .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(999.dp))
+            .clip(RoundedCornerShape(999.dp))
+            .padding(6.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 3.dp, vertical = 0.5.dp)
+                    .width(35.dp),
+                text = "",
+                style = CustomTypography.textXs.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = SkeletonColor,
+                    textAlign = TextAlign.Center
+                ),
+            )
+        }
+    }
+
+
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun TagTimePreview() {
@@ -136,4 +174,10 @@ private fun TagTimePreview2() {
         label = "Label",
         onClick = {},
     )
+}
+
+@Preview
+@Composable
+private fun TagTimeSkeletonPreview() {
+    TagTimeSkeleton()
 }

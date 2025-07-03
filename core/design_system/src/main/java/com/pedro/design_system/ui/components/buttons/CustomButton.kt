@@ -1,7 +1,9 @@
 package com.pedro.design_system.ui.components.buttons
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
@@ -20,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pedro.design_system.R
+import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
@@ -95,6 +98,23 @@ fun CustomButton(
     }
 }
 
+@Composable
+fun CustomButtonSkeleton(
+    sizeCustomButton: SizeCustomButton,
+) {
+    val heightIn = when (sizeCustomButton) {
+        SizeCustomButton.Small -> 28.dp
+        SizeCustomButton.Large -> 40.dp
+    }
+
+
+    Box(
+        modifier = Modifier
+            .size(heightIn)
+            .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(5.dp)),
+    )
+}
+
 enum class SizeCustomButton {
     Small,
     Large
@@ -151,4 +171,16 @@ private fun CustomButtonPrev4() {
         iconRes = R.drawable.pen_line,
         typeCustomButton = TypeCustomButton.Primary
     )
+}
+
+@Preview
+@Composable
+private fun CustomButtonSkeletonPrev1() {
+    CustomButtonSkeleton(sizeCustomButton = SizeCustomButton.Small)
+}
+
+@Preview
+@Composable
+private fun CustomButtonSkeletonPrev2() {
+    CustomButtonSkeleton(sizeCustomButton = SizeCustomButton.Large)
 }

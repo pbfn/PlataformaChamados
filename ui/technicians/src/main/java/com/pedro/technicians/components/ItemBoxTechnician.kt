@@ -21,14 +21,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pedro.design_system.R
 import com.pedro.design_system.ui.components.buttons.CustomButton
+import com.pedro.design_system.ui.components.buttons.CustomButtonSkeleton
 import com.pedro.design_system.ui.components.buttons.SizeCustomButton
 import com.pedro.design_system.ui.components.buttons.TypeCustomButton
 import com.pedro.design_system.ui.components.tags.TagTime
+import com.pedro.design_system.ui.components.tags.TagTimeSkeleton
+import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.BlueDark
+import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.Gray600
-import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.utils.getTwoInitialsAlways
 import com.pedro.technicians.model.TechnicianUI
 
@@ -123,6 +126,67 @@ fun ItemBoxTechnician(
 }
 
 
+@Composable
+fun ItemBoxTechnicianSkeleton() {
+    HorizontalDivider(color = Gray500)
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .height(64.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(start = 12.dp)
+                .fillMaxHeight()
+                .weight(0.6f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(50))
+                    .size(28.dp),
+                contentAlignment = Alignment.Center
+            ) {
+
+            }
+
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .background(brush = rememberSkeletonBrush(), shape = RoundedCornerShape(5.dp)),
+                text = ""
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .padding(start = 12.dp)
+                .fillMaxHeight()
+                .weight(0.4f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            TagTimeSkeleton()
+        }
+
+
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 12.dp)
+                .fillMaxHeight(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            CustomButtonSkeleton(
+                sizeCustomButton = SizeCustomButton.Small,
+            )
+
+        }
+
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 private fun ItemBoxTechnicianPreview() {
@@ -134,4 +198,10 @@ private fun ItemBoxTechnicianPreview() {
         ),
         onClickEditTechnician = {}
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ItemBoxTechnicianSkeletonPreview() {
+    ItemBoxTechnicianSkeleton()
 }

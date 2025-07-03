@@ -26,3 +26,6 @@ val FeedbackDanger = Color(0xFFD03E3E)
 val FeedbackOpen = Color(0xFFCC3D6A)
 val FeedbackProgress = Color(0xFF355EC5)
 val FeedbackDone = Color(0xFF508B26)
+
+
+val SkeletonColor = Color.Gray.copy(alpha = 0.5f)
