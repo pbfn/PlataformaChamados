@@ -71,4 +71,5 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:register_user"))
     implementation(project(":ui:technicians"))
+    implementation(project(":data:technicians"))
 }

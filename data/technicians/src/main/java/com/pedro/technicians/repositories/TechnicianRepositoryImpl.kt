@@ -3,6 +3,9 @@ package com.pedro.technicians.repositories
 import com.pedro.technicians.datasource.local.TechnicianLocalDataSource
 import com.pedro.technicians.datasource.remote.TechnicianRemoteDataSource
 import com.pedro.technicians.model.Technician
+import com.pedro.technicians.model.TechnicianDomain
+import com.pedro.technicians.repository.TechnicianRepository
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -47,17 +50,27 @@ class TechnicianRepositoryImpl(
         ),
     )
 
-    override fun loadAllTechnicians(): Flow<List<Technician>> = flow {
+    override fun loadAllTechnicians(): Flow<List<TechnicianDomain>> = flow {
         delay(5000L)
         emit(
-            mockedList
+            mockedList.map { it.toDomain() }
         )
     }
 
-    override fun loadTechnicianById(id: Int): Flow<Technician?> = flow {
+    override fun loadTechnicianById(id: Int): Flow<TechnicianDomain?> = flow {
         delay(2000L)
         emit(
-            mockedList.find { it.id == id }
+            mockedList.find { it.id == id }?.toDomain()
         )
     }
+}
+
+
+fun Technician.toDomain(): TechnicianDomain {
+    return TechnicianDomain(
+        id = id,
+        name = name,
+        email = email,
+        availabilities = availabilities
+    )
 }

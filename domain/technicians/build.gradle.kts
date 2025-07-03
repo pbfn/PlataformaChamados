@@ -43,6 +43,4 @@ dependencies {
 
     implementation(libs.koin.androidx.compose)
 
-    implementation(project(":data:technicians"))
-
 }

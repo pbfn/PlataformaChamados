@@ -2,6 +2,7 @@ package com.pedro.plataformachamados
 
 import android.app.Application
 import com.pedro.plataformachamados.di.viewModelModule
+import com.pedro.technicians.di.provideDataModules
 import com.pedro.technicians.di.provideTechniciansModules
 import di.provideFirebaseModule
 import org.koin.android.ext.koin.androidContext
@@ -19,6 +20,7 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             modules(
                 provideFirebaseModule(),
+                provideDataModules(),
                 *provideTechniciansModules().toTypedArray(),
                 viewModelModule,
             )

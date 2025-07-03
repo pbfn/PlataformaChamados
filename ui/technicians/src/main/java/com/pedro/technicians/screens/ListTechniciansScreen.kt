@@ -1,9 +1,12 @@
 package com.pedro.technicians.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,33 +32,46 @@ fun ListTechniciansScreen(
     onClickEditTechnician: (TechnicianUI) -> Unit
 ) {
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = "Técnicos",
-                style = CustomTypography.textLg,
-                color = BlueDark,
-                modifier = Modifier.weight(1f)
-            )
-            CustomButton(
-                typeCustomButton = TypeCustomButton.Primary,
-                sizeCustomButton = SizeCustomButton.Large,
-                iconRes = R.drawable.plus,
-                onClick = {
-                    onClickAddTechnician()
-                }
-            )
+    when (state) {
+        is ListTechniciansUiState.Error -> {}
+        ListTechniciansUiState.Loading -> {
+            Box(contentAlignment = Alignment.Center,modifier = Modifier.fillMaxSize()) {
+                CircularProgressIndicator()
+            }
         }
 
-        BoxTechnicians(
-            listTechnicians = state.listTechnicians,
-            onClickEditTechnician = onClickEditTechnician,
-        )
+        is ListTechniciansUiState.Success -> {
+            Column(
+                modifier = modifier
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Técnicos",
+                        style = CustomTypography.textLg,
+                        color = BlueDark,
+                        modifier = Modifier.weight(1f)
+                    )
+                    CustomButton(
+                        typeCustomButton = TypeCustomButton.Primary,
+                        sizeCustomButton = SizeCustomButton.Large,
+                        iconRes = R.drawable.plus,
+                        onClick = {
+                            onClickAddTechnician()
+                        }
+                    )
+                }
+
+                BoxTechnicians(
+                    listTechnicians = state.listTechnicians,
+                    onClickEditTechnician = onClickEditTechnician,
+                )
+            }
+        }
     }
+
+
 }
 
 
@@ -65,6 +81,6 @@ private fun TechnicianScreenPreview() {
     ListTechniciansScreen(
         onClickAddTechnician = {},
         onClickEditTechnician = {},
-        state = ListTechniciansUiState()
+        state = ListTechniciansUiState.Success()
     )
 }

@@ -8,5 +8,4 @@ fun provideDomainModules(): List<Module> = listOf(
     module {
         factory { GetAllTechniciansUseCase(get()) }
     },
-    provideDataModules()
 )
