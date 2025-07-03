@@ -194,6 +194,7 @@ private fun ItemBoxTechnicianPreview() {
         technician = TechnicianUI(
             id = 1,
             name = "Pedro Bruno",
+            email = "pedro@gmail.com",
             availabilities = listOf("08:00", "10:00", "13:00", "15:00")
         ),
         onClickEditTechnician = {}

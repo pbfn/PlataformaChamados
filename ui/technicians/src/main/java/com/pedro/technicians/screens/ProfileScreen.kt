@@ -1,12 +1,16 @@
 package com.pedro.technicians.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,15 +48,27 @@ fun ProfileScreen(
             onCancel = { onNavigateBack() }
         )
 
-        BoxPersonalInformation(
-            state.boxPersonalDataUiState,
-            onNameChanged,
-            focusManager,
-            onEmailChanged,
-            onPasswordChanged,
-        )
+        when (state) {
+            is ProfileUiState.Error -> TODO()
+            ProfileUiState.Loading -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
 
-        BoxOpeningHours(state.boxOpeningHoursUiState)
+            is ProfileUiState.Success -> {
+                BoxPersonalInformation(
+                    state.boxPersonalDataUiState,
+                    onNameChanged,
+                    focusManager,
+                    onEmailChanged,
+                    onPasswordChanged,
+                )
+
+                BoxOpeningHours(state.boxOpeningHoursUiState)
+            }
+        }
+
 
     }
 }
@@ -67,7 +83,7 @@ private fun ProfileTechniciansScreenPreview() {
 
 
     ProfileScreen(
-        state = ProfileUiState(
+        state = ProfileUiState.Success(
             boxPersonalDataUiState = BoxPersonalDataUiState(
                 isEdit = false,
                 helperTextPassword = "Mínimo de 6 dígitos",
@@ -101,7 +117,7 @@ private fun ProfileTechniciansScreenPreview1() {
     val listNightHours = listOf<String>("19:00", "20:00", "21:00", "22:00", "23:00")
     val listNightSelected = listOf<String>("23:00")
     ProfileScreen(
-        state = ProfileUiState(
+        state = ProfileUiState.Success(
             boxPersonalDataUiState = BoxPersonalDataUiState(
                 isEdit = true,
                 helperTextPassword = "Mínimo de 6 dígitos",
@@ -115,6 +131,18 @@ private fun ProfileTechniciansScreenPreview1() {
                 listNightSelected = listNightSelected,
             )
         ),
+        onNavigateBack = {},
+        onNameChanged = { },
+        onEmailChanged = {},
+        onPasswordChanged = {},
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProfileTechniciansScreenPreview2() {
+    ProfileScreen(
+        state = ProfileUiState.Loading,
         onNavigateBack = {},
         onNameChanged = { },
         onEmailChanged = {},

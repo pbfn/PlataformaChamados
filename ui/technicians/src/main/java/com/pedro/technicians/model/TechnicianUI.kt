@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class TechnicianUI(
     val id: Int,
     val name: String,
+    val email: String,
     val availabilities: List<String>
 )
