@@ -1,6 +1,6 @@
-package com.pedro.technicians.model.remote
+package com.pedro.network.model
 
-data class TechnicianRemote(
+data class TechnicianFireStore(
     val id: Int,
     val name: String,
     val email: String,

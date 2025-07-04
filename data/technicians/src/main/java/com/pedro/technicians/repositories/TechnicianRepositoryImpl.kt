@@ -53,7 +53,12 @@ class TechnicianRepositoryImpl(
     override fun loadAllTechnicians(): Flow<List<TechnicianDomain>> = flow {
         delay(5000L)
         emit(
-            mockedList.map { it.toDomain() }
+            remoteDataSource.getAllTechnicians().map { TechnicianDomain(
+                id = it.id,
+                name = it.name,
+                email = it.email,
+                availabilities = it.availabilities
+            ) }
         )
     }
 

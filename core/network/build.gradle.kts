@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.pedro.technicians"
+    namespace = "com.pedro.network"
     compileSdk = 35
 
     defaultConfig {
@@ -41,9 +42,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.firebase.firestore)
     implementation(libs.koin.androidx.compose)
-
-    implementation(project(":domain:technicians"))
-
-    implementation(project(":core:network"))
 }
