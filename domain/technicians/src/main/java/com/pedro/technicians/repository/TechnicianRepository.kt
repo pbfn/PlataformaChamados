@@ -8,4 +8,6 @@ interface TechnicianRepository {
     fun loadAllTechnicians(): Flow<List<TechnicianDomain>>
 
     fun loadTechnicianById(id: Int): Flow<TechnicianDomain?>
+
+    suspend fun saveTechnician(technicianDomain: TechnicianDomain)
 }

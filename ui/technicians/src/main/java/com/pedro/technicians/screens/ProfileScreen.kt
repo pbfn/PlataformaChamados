@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -30,6 +31,7 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     state: ProfileUiState,
     onNavigateBack: () -> Unit,
+    onSave: () -> Unit,
     onNameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -54,7 +56,9 @@ fun ProfileScreen(
             ) {
                 TopProfileTechnician(
                     onNavigateBack = { onNavigateBack() },
-                    onSave = {},
+                    onSave = {
+                        onSave()
+                    },
                     onCancel = { onNavigateBack() }
                 )
                 BoxPersonalInformation(
@@ -119,6 +123,7 @@ private fun ProfileTechniciansScreenPreview() {
         onNavigateBack = {},
         onNameChanged = { },
         onEmailChanged = {},
+        onSave = {},
         onPasswordChanged = {},
     )
 }
@@ -154,6 +159,7 @@ private fun ProfileTechniciansScreenPreview1() {
         onNameChanged = { },
         onEmailChanged = {},
         onPasswordChanged = {},
+        onSave = {},
     )
 }
 
@@ -166,5 +172,6 @@ private fun ProfileTechniciansScreenPreview2() {
         onNameChanged = { },
         onEmailChanged = {},
         onPasswordChanged = {},
+        onSave = {},
     )
 }

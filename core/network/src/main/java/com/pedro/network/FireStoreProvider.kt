@@ -16,12 +16,4 @@ class FireStoreProvider(
 
         return snapshot.documents.mapNotNull { it.toObject(TechnicianFireStore::class.java) }
     }
-
-    suspend fun saveTechnician(technician: TechnicianFireStore) {
-        firestore
-            .collection("technicians")
-            .document(technician.id.toString())
-            .set(technician)
-            .await()
-    }
 }

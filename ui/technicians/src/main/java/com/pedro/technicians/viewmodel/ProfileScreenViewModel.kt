@@ -3,40 +3,50 @@ package com.pedro.technicians.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pedro.technicians.GetTechnicianByIdUseCase
+import com.pedro.technicians.SaveTechnicianUseCase
 import com.pedro.technicians.events.ProfileUiEvents
 import com.pedro.technicians.mapper.toUI
+import com.pedro.technicians.model.TechnicianDomain
 import com.pedro.technicians.model.TechnicianUI
 import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
 import com.pedro.technicians.states.profile.BoxPersonalDataUiState
 import com.pedro.technicians.states.profile.ProfileUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 class ProfileScreenViewModel(
-    private val getTechnicianByIdUseCase: GetTechnicianByIdUseCase
+    private val getTechnicianByIdUseCase: GetTechnicianByIdUseCase,
+    private val saveTechnicianUseCase: SaveTechnicianUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
     val state: StateFlow<ProfileUiState> = _state.asStateFlow()
+
+    private val _eventFlow = MutableSharedFlow<ProfileUiEvents>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     fun onEvent(event: ProfileUiEvents) {
         when (event) {
             is ProfileUiEvents.OnChangeEmail -> onEmailChanged(event.email)
             is ProfileUiEvents.OnChangeName -> onNameChanged(event.name)
             is ProfileUiEvents.OnChangePassword -> onPasswordChanged(event.password)
-            ProfileUiEvents.OnLoadGenericHours -> {}
-            ProfileUiEvents.OnLoadTechHours -> {}
             is ProfileUiEvents.OnSetInitialScreen -> onSetInitialScreen(
                 event.isEditing,
                 event.technicianId
             )
+
+            ProfileUiEvents.OnSaveTechnician -> onSaveTechnician()
+            ProfileUiEvents.TechnicianSaved -> {}
         }
     }
 
@@ -135,6 +145,33 @@ class ProfileScreenViewModel(
             boxPersonalDataUiState = boxPersonalDataUiState,
             boxOpeningHoursUiState = boxOpeningHoursUiState
         )
+    }
+
+    fun onSaveTechnician() {
+        viewModelScope.launch {
+            val currentState = state.value
+            when (currentState) {
+                is ProfileUiState.Success -> {
+                    val name = currentState.boxPersonalDataUiState.name
+                    val email = currentState.boxPersonalDataUiState.email
+
+                    val id = Random.nextInt(1,999)
+
+                    saveTechnicianUseCase.invoke(
+                        technicianDomain = TechnicianDomain(
+                            id = id,
+                            name = name,
+                            email = email,
+                            availabilities = listOf()
+                        )
+                    )
+
+                    _eventFlow.emit(ProfileUiEvents.TechnicianSaved)
+                }
+                else -> {}
+            }
+        }
+
     }
 
 }

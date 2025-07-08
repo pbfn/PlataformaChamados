@@ -86,12 +86,14 @@ fun ItemBoxTechnician(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            TagTime(
-                isReadyOnly = true,
-                isSelected = false,
-                label = technician.availabilities.first(),
-                onClick = {}
-            )
+
+            if (technician.availabilities.isNotEmpty())
+                TagTime(
+                    isReadyOnly = true,
+                    isSelected = false,
+                    label = technician.availabilities.first(),
+                    onClick = {}
+                )
 
             if (technician.availabilities.size > 1) {
 

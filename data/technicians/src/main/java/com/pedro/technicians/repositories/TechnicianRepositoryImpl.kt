@@ -4,6 +4,7 @@ import com.pedro.technicians.datasource.local.TechnicianLocalDataSource
 import com.pedro.technicians.datasource.remote.TechnicianRemoteDataSource
 import com.pedro.technicians.model.Technician
 import com.pedro.technicians.model.TechnicianDomain
+import com.pedro.technicians.model.remote.TechnicianRemote
 import com.pedro.technicians.repository.TechnicianRepository
 
 import kotlinx.coroutines.delay
@@ -53,12 +54,14 @@ class TechnicianRepositoryImpl(
     override fun loadAllTechnicians(): Flow<List<TechnicianDomain>> = flow {
         delay(5000L)
         emit(
-            remoteDataSource.getAllTechnicians().map { TechnicianDomain(
-                id = it.id,
-                name = it.name,
-                email = it.email,
-                availabilities = it.availabilities
-            ) }
+            remoteDataSource.getAllTechnicians().map {
+                TechnicianDomain(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                    availabilities = it.availabilities
+                )
+            }
         )
     }
 
@@ -66,6 +69,17 @@ class TechnicianRepositoryImpl(
         delay(2000L)
         emit(
             mockedList.find { it.id == id }?.toDomain()
+        )
+    }
+
+    override suspend fun saveTechnician(technicianDomain: TechnicianDomain) {
+        remoteDataSource.saveTechnician(
+            TechnicianRemote(
+                id = technicianDomain.id,
+                name = technicianDomain.name,
+                email = technicianDomain.email,
+                availabilities = technicianDomain.availabilities
+            )
         )
     }
 }

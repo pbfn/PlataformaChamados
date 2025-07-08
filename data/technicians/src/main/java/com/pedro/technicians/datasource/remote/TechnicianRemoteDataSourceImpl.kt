@@ -1,6 +1,7 @@
 package com.pedro.technicians.datasource.remote
 
 import com.pedro.network.FireStoreProvider
+import com.pedro.network.model.TechnicianFireStore
 import com.pedro.technicians.model.remote.TechnicianRemote
 
 class TechnicianRemoteDataSourceImpl(
@@ -16,6 +17,10 @@ class TechnicianRemoteDataSourceImpl(
                 availabilities = it.availabilities
             )
         }
+    }
+
+    override suspend fun saveTechnician(technicianRemote: TechnicianRemote) {
+
     }
 
 }

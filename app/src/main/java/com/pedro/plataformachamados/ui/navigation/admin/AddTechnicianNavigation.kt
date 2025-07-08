@@ -1,8 +1,10 @@
 package com.pedro.plataformachamados.ui.navigation.admin
 
+import android.widget.Toast
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
@@ -34,8 +36,22 @@ fun NavGraphBuilder.addTechnicianScreen(
         val viewModel = koinViewModel<ProfileScreenViewModel>()
         val state by viewModel.state.collectAsState()
 
+        val context = LocalContext.current
+
         LaunchedEffect(Unit) {
             viewModel.onEvent(ProfileUiEvents.OnSetInitialScreen(isEditing, technicianId.toInt()))
+        }
+
+        LaunchedEffect(Unit) {
+            viewModel.eventFlow.collect { event ->
+                when (event) {
+                    ProfileUiEvents.TechnicianSaved -> {
+                        onPopBackStack()
+                        Toast.makeText(context, "Técnico salvo com sucesso", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
+                }
+            }
         }
 
         ProfileScreen(
@@ -49,6 +65,9 @@ fun NavGraphBuilder.addTechnicianScreen(
             },
             onPasswordChanged = {
                 viewModel.onEvent(ProfileUiEvents.OnChangePassword(it))
+            },
+            onSave = {
+                viewModel.onEvent(ProfileUiEvents.OnSaveTechnician)
             }
         )
     }
