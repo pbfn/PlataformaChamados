@@ -68,6 +68,9 @@ fun NavGraphBuilder.addTechnicianScreen(
             },
             onSave = {
                 viewModel.onEvent(ProfileUiEvents.OnSaveTechnician)
+            },
+            onSelectedHour = {  hourSelected, hoursType ->
+                viewModel.onEvent(ProfileUiEvents.OnSelectedHour(hourSelected,hoursType))
             }
         )
     }

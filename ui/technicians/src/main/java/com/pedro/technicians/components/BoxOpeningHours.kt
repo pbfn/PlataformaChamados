@@ -16,11 +16,13 @@ import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.CustomTypography
+import com.pedro.technicians.model.HoursType
 import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
 
 @Composable
 fun BoxOpeningHours(
-    state: BoxOpeningHoursUiState
+    state: BoxOpeningHoursUiState,
+    onSelectedHour: (String, HoursType) -> Unit
 ) {
     CustomBoxWithBorder {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -41,19 +43,25 @@ fun BoxOpeningHours(
                 title = "Manhã",
                 listHours = state.listMorningHours,
                 listSelectedHour = state.listMorningSelected,
-                onSelectedHour = {},
+                onSelectedHour = { hourSelected ->
+                    onSelectedHour(hourSelected, HoursType.MORNING)
+                },
             )
             BoxHours(
                 title = "Tarde",
                 listHours = state.listAfternoonHours,
                 listSelectedHour = state.listAfternoonSelected,
-                onSelectedHour = {},
+                onSelectedHour = { hourSelected ->
+                    onSelectedHour(hourSelected, HoursType.AFTERNOON)
+                },
             )
             BoxHours(
                 title = "Noite",
                 listHours = state.listNightHours,
                 listSelectedHour = state.listNightSelected,
-                onSelectedHour = {},
+                onSelectedHour = { hourSelected ->
+                    onSelectedHour(hourSelected, HoursType.NIGHT)
+                },
             )
         }
     }
@@ -106,7 +114,10 @@ private fun BoxOpeningHoursPreview() {
             listAfternoonSelected = emptyList(),
             listNightHours = listNightHours,
             listNightSelected = emptyList()
-        )
+        ),
+        onSelectedHour = { hourSelected, hoursType ->
+
+        }
     )
 }
 
@@ -129,6 +140,9 @@ private fun BoxOpeningHoursPreview1() {
             listAfternoonSelected = listAfternoonSelected,
             listNightHours = listNightHours,
             listNightSelected = listNightSelected
-        )
+        ),
+        onSelectedHour = { hourSelected, hoursType ->
+
+        }
     )
 }

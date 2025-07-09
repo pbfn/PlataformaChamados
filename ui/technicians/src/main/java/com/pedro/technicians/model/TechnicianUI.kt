@@ -7,5 +7,8 @@ data class TechnicianUI(
     val id: Int,
     val name: String,
     val email: String,
-    val availabilities: List<String>
+    val availabilities: List<String>,
+    val morningAvailabilities: List<String> = listOf(),
+    val afternoonAvailabilities: List<String> = listOf(),
+    val nightAvailabilities: List<String> = listOf(),
 )

@@ -21,6 +21,7 @@ import com.pedro.technicians.components.BoxPersonalInformation
 import com.pedro.technicians.components.BoxPersonalInformationSkeleton
 import com.pedro.technicians.components.TopProfileTechnician
 import com.pedro.technicians.components.TopProfileTechnicianSkeleton
+import com.pedro.technicians.model.HoursType
 import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
 import com.pedro.technicians.states.profile.BoxPersonalDataUiState
 import com.pedro.technicians.states.profile.ProfileUiState
@@ -35,6 +36,7 @@ fun ProfileScreen(
     onNameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
+    onSelectedHour: (String, HoursType) -> Unit,
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -69,7 +71,12 @@ fun ProfileScreen(
                     onPasswordChanged,
                 )
 
-                BoxOpeningHours(state.boxOpeningHoursUiState)
+                BoxOpeningHours(
+                    state.boxOpeningHoursUiState,
+                    onSelectedHour = { hourSelected, hoursType ->
+                        onSelectedHour(hourSelected, hoursType)
+                    }
+                )
 
             }
 
@@ -125,6 +132,9 @@ private fun ProfileTechniciansScreenPreview() {
         onEmailChanged = {},
         onSave = {},
         onPasswordChanged = {},
+        onSelectedHour = { hourSelected, hoursType ->
+
+        }
     )
 }
 
@@ -160,6 +170,9 @@ private fun ProfileTechniciansScreenPreview1() {
         onEmailChanged = {},
         onPasswordChanged = {},
         onSave = {},
+        onSelectedHour = { hourSelected, hoursType ->
+
+        }
     )
 }
 
@@ -173,5 +186,8 @@ private fun ProfileTechniciansScreenPreview2() {
         onEmailChanged = {},
         onPasswordChanged = {},
         onSave = {},
+        onSelectedHour = { hourSelected, hoursType ->
+
+        }
     )
 }

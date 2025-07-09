@@ -6,6 +6,7 @@ import com.pedro.technicians.GetTechnicianByIdUseCase
 import com.pedro.technicians.SaveTechnicianUseCase
 import com.pedro.technicians.events.ProfileUiEvents
 import com.pedro.technicians.mapper.toUI
+import com.pedro.technicians.model.HoursType
 import com.pedro.technicians.model.TechnicianDomain
 import com.pedro.technicians.model.TechnicianUI
 import com.pedro.technicians.states.profile.BoxOpeningHoursUiState
@@ -47,6 +48,7 @@ class ProfileScreenViewModel(
 
             ProfileUiEvents.OnSaveTechnician -> onSaveTechnician()
             ProfileUiEvents.TechnicianSaved -> {}
+            is ProfileUiEvents.OnSelectedHour -> onSelectedHour(event.selectedHour, event.hoursType)
         }
     }
 
@@ -117,7 +119,9 @@ class ProfileScreenViewModel(
             if (technician != null) {
                 boxOpeningHoursUiState =
                     boxOpeningHoursUiState.copy(
-                        listMorningSelected = technician.availabilities
+                        listMorningSelected = technician.morningAvailabilities,
+                        listAfternoonSelected = technician.afternoonAvailabilities,
+                        listNightSelected = technician.nightAvailabilities
                     )
                 boxPersonalDataUiState = boxPersonalDataUiState.copy(
                     name = technician.name,
@@ -155,7 +159,7 @@ class ProfileScreenViewModel(
                     val name = currentState.boxPersonalDataUiState.name
                     val email = currentState.boxPersonalDataUiState.email
 
-                    val id = Random.nextInt(1,999)
+                    val id = Random.nextInt(1, 999)
 
                     saveTechnicianUseCase.invoke(
                         technicianDomain = TechnicianDomain(
@@ -172,6 +176,33 @@ class ProfileScreenViewModel(
             }
         }
 
+    }
+
+    private fun onSelectedHour(selectedHour: String, hoursType: HoursType) {
+        _state.update { currentState ->
+            if (currentState is ProfileUiState.Success) {
+                val boxState = currentState.boxOpeningHoursUiState
+
+                val updatedList = when (hoursType) {
+                    HoursType.MORNING -> boxState.listMorningSelected
+                    HoursType.AFTERNOON -> boxState.listAfternoonSelected
+                    HoursType.NIGHT -> boxState.listNightSelected
+                }.let { list ->
+                    if (list.contains(selectedHour)) list - selectedHour
+                    else list + selectedHour
+                }
+
+                val updatedBoxState = when (hoursType) {
+                    HoursType.MORNING -> boxState.copy(listMorningSelected = updatedList)
+                    HoursType.AFTERNOON -> boxState.copy(listAfternoonSelected = updatedList)
+                    HoursType.NIGHT -> boxState.copy(listNightSelected = updatedList)
+                }
+
+                currentState.copy(boxOpeningHoursUiState = updatedBoxState)
+            } else {
+                currentState
+            }
+        }
     }
 
 }
