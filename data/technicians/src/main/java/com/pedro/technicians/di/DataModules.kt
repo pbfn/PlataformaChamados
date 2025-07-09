@@ -14,7 +14,7 @@ import kotlin.collections.List
 fun provideDataModules(): List<Module> = listOf(
     module {
         single<TechnicianLocalDataSource> { TechnicianLocalDataSourceImpl() }
-        single<TechnicianRemoteDataSource> { TechnicianRemoteDataSourceImpl(get()) }
+        single<TechnicianRemoteDataSource> { TechnicianRemoteDataSourceImpl(get(),get()) }
         single<TechnicianRepository> { TechnicianRepositoryImpl(get(), get()) }
     },
     *provideNetworkModules().toTypedArray()

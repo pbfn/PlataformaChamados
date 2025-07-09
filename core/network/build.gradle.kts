@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -44,4 +45,8 @@ dependencies {
 
     implementation(libs.firebase.firestore)
     implementation(libs.koin.androidx.compose)
+
+
+    implementation(platform(libs.ktor.bom))
+    implementation(libs.bundles.ktor.client)
 }
