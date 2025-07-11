@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.random.Random
 
 class ProfileScreenViewModel(
     private val getTechnicianByIdUseCase: GetTechnicianByIdUseCase,

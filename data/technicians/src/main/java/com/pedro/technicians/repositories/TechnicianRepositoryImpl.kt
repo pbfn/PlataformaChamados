@@ -74,10 +74,12 @@ class TechnicianRepositoryImpl(
     }
 
     override fun loadTechnicianById(id: String): Flow<TechnicianDomain?> = flow {
-        delay(2000L)
-        emit(
-            mockedList.find { it.id == id }?.toDomain()
-        )
+        val response = remoteDataSource.getTechnicianById(id)
+        if (response != null) {
+            emit(
+                response.toDomain()
+            )
+        }
     }
 
     override suspend fun saveTechnician(technicianDomain: TechnicianDomain) {
@@ -95,6 +97,18 @@ class TechnicianRepositoryImpl(
 
 
 fun Technician.toDomain(): TechnicianDomain {
+    return TechnicianDomain(
+        id = id,
+        name = name,
+        email = email,
+        password = password,
+        morningAvailabilities = availabilities.filterByPeriod(HoursPeriod.MORNING),
+        afternoonAvailabilities = availabilities.filterByPeriod(HoursPeriod.AFTERNOON),
+        nightAvailabilities = availabilities.filterByPeriod(HoursPeriod.NIGHT),
+    )
+}
+
+fun TechnicianRemote.toDomain(): TechnicianDomain {
     return TechnicianDomain(
         id = id,
         name = name,

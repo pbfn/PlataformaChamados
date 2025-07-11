@@ -22,6 +22,18 @@ class TechnicianRemoteDataSourceImpl(
         }
     }
 
+    override suspend fun getTechnicianById(id: String): TechnicianRemote? {
+        val response = fireStoreProvider.getTechnicianById(id)
+        return if (response != null)
+            TechnicianRemote(
+                id = response.id,
+                name = response.name,
+                email = response.email,
+                password = "",
+                availabilities = response.availabilities
+            ) else null
+    }
+
     override suspend fun saveTechnician(technicianRemote: TechnicianRemote) {
         technicianApiService.saveTechnician(
             TechnicianDTO(

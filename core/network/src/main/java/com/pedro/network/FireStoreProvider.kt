@@ -19,4 +19,15 @@ class FireStoreProvider(
             doc.toObject(TechnicianFireStore::class.java)?.copy(id = doc.id)
         }
     }
+
+    suspend fun getTechnicianById(id: String):TechnicianFireStore? {
+        val snapshot = firestore
+            .collection("users")
+            .document(id)
+            .get()
+            .await()
+
+        return snapshot.toObject(TechnicianFireStore::class.java)?.copy(id = snapshot.id)
+
+    }
 }
