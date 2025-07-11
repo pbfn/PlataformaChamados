@@ -26,11 +26,11 @@ fun NavGraphBuilder.addTechnicianScreen(
         route = "$addTechnicianRoute?isEditing={isEditing}&technicianId={technicianId}",
         arguments = listOf(
             navArgument("isEditing") { type = NavType.BoolType; defaultValue = false },
-            navArgument("technicianId") { type = NavType.IntType; nullable = false }
+            navArgument("technicianId") { type = NavType.StringType; nullable = false }
         )
     ) { backStackEntry ->
         val isEditing = backStackEntry.arguments?.getBoolean("isEditing") ?: false
-        val technicianId = backStackEntry.arguments?.getInt("technicianId") ?: 0
+        val technicianId = backStackEntry.arguments?.getString("technicianId", "") ?: ""
 
 
         val viewModel = koinViewModel<ProfileScreenViewModel>()
@@ -39,7 +39,7 @@ fun NavGraphBuilder.addTechnicianScreen(
         val context = LocalContext.current
 
         LaunchedEffect(Unit) {
-            viewModel.onEvent(ProfileUiEvents.OnSetInitialScreen(isEditing, technicianId.toInt()))
+            viewModel.onEvent(ProfileUiEvents.OnSetInitialScreen(isEditing, technicianId))
         }
 
         LaunchedEffect(Unit) {
@@ -81,10 +81,10 @@ fun NavHostController.navigateToAddTechnicianScreen(
     isEditing: Boolean,
     technicianSelected: TechnicianUI?
 ) {
-    val technicianId = technicianSelected?.id ?: 0
+    val technicianId = technicianSelected?.id ?: ""
     navigate(buildAddTechnicianRoute(isEditing, technicianId), navOptions)
 }
 
-private fun buildAddTechnicianRoute(isEditing: Boolean, technicianId: Int): String {
+private fun buildAddTechnicianRoute(isEditing: Boolean, technicianId: String): String {
     return "addTechnicianRoute?isEditing=$isEditing&technicianId=${technicianId}"
 }

@@ -108,7 +108,7 @@ class ProfileScreenViewModel(
         )
     }
 
-    private fun onSetInitialScreen(isEditing: Boolean, technicianId: Int) {
+    private fun onSetInitialScreen(isEditing: Boolean, technicianId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             var technician: TechnicianUI? = null
             if (isEditing) {
@@ -133,7 +133,7 @@ class ProfileScreenViewModel(
         }
     }
 
-    private suspend fun onLoadTechnicianById(id: Int): TechnicianUI? = withContext(Dispatchers.IO) {
+    private suspend fun onLoadTechnicianById(id: String): TechnicianUI? = withContext(Dispatchers.IO) {
         getTechnicianByIdUseCase.invoke(id)
             .firstOrNull()
             ?.toUI()
@@ -142,7 +142,7 @@ class ProfileScreenViewModel(
     private fun onSetupSuccess(
         boxOpeningHoursUiState: BoxOpeningHoursUiState,
         boxPersonalDataUiState: BoxPersonalDataUiState,
-        technicianId: Int
+        technicianId: String
     ) {
         _state.value = ProfileUiState.Success(
             technicianSelectedID = technicianId,
@@ -163,11 +163,9 @@ class ProfileScreenViewModel(
                     val afternoonAvailabilities = currentState.boxOpeningHoursUiState.listAfternoonSelected
                     val nightAvailabilities = currentState.boxOpeningHoursUiState.listNightSelected
 
-                    val id = Random.nextInt(1, 999)
 
                     saveTechnicianUseCase.invoke(
                         technicianDomain = TechnicianDomain(
-                            id = id,
                             name = name,
                             email = email,
                             password = password,

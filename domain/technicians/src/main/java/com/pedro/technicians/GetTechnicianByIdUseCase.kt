@@ -8,6 +8,6 @@ class GetTechnicianByIdUseCase(
     private val technicianRepository: TechnicianRepository
 ) {
 
-    operator fun invoke(id: Int): Flow<TechnicianDomain?> =
+    operator fun invoke(id: String): Flow<TechnicianDomain?> =
         technicianRepository.loadTechnicianById(id)
 }

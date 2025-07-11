@@ -10,10 +10,13 @@ class FireStoreProvider(
 
     suspend fun getAllTechnicians(): List<TechnicianFireStore> {
         val snapshot = firestore
-            .collection("technicians")
+            .collection("users")
+            .whereEqualTo("role", "TECHNICIAN")
             .get()
             .await()
 
-        return snapshot.documents.mapNotNull { it.toObject(TechnicianFireStore::class.java) }
+        return snapshot.documents.mapNotNull { doc ->
+            doc.toObject(TechnicianFireStore::class.java)?.copy(id = doc.id)
+        }
     }
 }

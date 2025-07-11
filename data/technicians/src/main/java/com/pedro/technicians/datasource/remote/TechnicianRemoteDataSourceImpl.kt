@@ -25,9 +25,9 @@ class TechnicianRemoteDataSourceImpl(
     override suspend fun saveTechnician(technicianRemote: TechnicianRemote) {
         technicianApiService.saveTechnician(
             TechnicianDTO(
-                nome = technicianRemote.name,
-                login = technicianRemote.email,
-                senha = technicianRemote.password,
+                name = technicianRemote.name,
+                email = technicianRemote.email,
+                password = technicianRemote.password,
                 role = "TECHNICIAN",
                 availabilities = technicianRemote.availabilities
             )

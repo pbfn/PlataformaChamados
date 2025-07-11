@@ -20,14 +20,14 @@ class TechnicianRepositoryImpl(
 
     private val mockedList = listOf(
         Technician(
-            id = 1,
+            id = "1",
             name = "Pedro Bruno",
             email = "pedro@gmail.com",
             password = "",
             availabilities = listOf("08:00", "10:00", "13:00", "15:00")
         ),
         Technician(
-            id = 2,
+            id = "2",
             name = "Rebeca Nantes",
             email = "rebeca@gmail.com",
             password = "",
@@ -42,7 +42,7 @@ class TechnicianRepositoryImpl(
             )
         ),
         Technician(
-            id = 3,
+            id = "3",
             name = "João Paulo",
             email = "joao@gmail.com",
             password = "",
@@ -50,7 +50,7 @@ class TechnicianRepositoryImpl(
         ),
         Technician(
             email = "ricardo@gmail.com",
-            id = 4,
+            id = "4",
             name = "Ricardo",
             password = "",
             availabilities = listOf("16:00")
@@ -58,7 +58,6 @@ class TechnicianRepositoryImpl(
     )
 
     override fun loadAllTechnicians(): Flow<List<TechnicianDomain>> = flow {
-        delay(5000L)
         emit(
             remoteDataSource.getAllTechnicians().map {
                 TechnicianDomain(
@@ -74,7 +73,7 @@ class TechnicianRepositoryImpl(
         )
     }
 
-    override fun loadTechnicianById(id: Int): Flow<TechnicianDomain?> = flow {
+    override fun loadTechnicianById(id: String): Flow<TechnicianDomain?> = flow {
         delay(2000L)
         emit(
             mockedList.find { it.id == id }?.toDomain()

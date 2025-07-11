@@ -24,9 +24,9 @@ class TechnicianApiService(private val client: HttpClient) {
 
 @Serializable
 data class TechnicianDTO(
-    val nome: String,
-    val login: String,
-    val senha: String,
+    val name: String,
+    val email: String,
+    val password: String,
     val role: String,
     val availabilities: List<String>
 )
