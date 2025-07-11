@@ -8,5 +8,8 @@ fun TechnicianDomain.toUI(): TechnicianUI =
         id = this.id,
         name = this.name,
         email = this.email,
-        availabilities = this.availabilities
+        password = this.password,
+        morningAvailabilities = this.morningAvailabilities,
+        afternoonAvailabilities = this.afternoonAvailabilities,
+        nightAvailabilities = this.nightAvailabilities,
     )

@@ -4,5 +4,8 @@ data class TechnicianDomain(
     val id: Int,
     val name: String,
     val email: String,
-    val availabilities: List<String>
+    val password: String,
+    val morningAvailabilities: List<String>,
+    val afternoonAvailabilities: List<String>,
+    val nightAvailabilities: List<String>,
 )

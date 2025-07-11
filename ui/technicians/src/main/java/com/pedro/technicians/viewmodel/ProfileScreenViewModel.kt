@@ -158,6 +158,10 @@ class ProfileScreenViewModel(
                 is ProfileUiState.Success -> {
                     val name = currentState.boxPersonalDataUiState.name
                     val email = currentState.boxPersonalDataUiState.email
+                    val password = currentState.boxPersonalDataUiState.password
+                    val morningAvailabilities = currentState.boxOpeningHoursUiState.listMorningSelected
+                    val afternoonAvailabilities = currentState.boxOpeningHoursUiState.listAfternoonSelected
+                    val nightAvailabilities = currentState.boxOpeningHoursUiState.listNightSelected
 
                     val id = Random.nextInt(1, 999)
 
@@ -166,7 +170,10 @@ class ProfileScreenViewModel(
                             id = id,
                             name = name,
                             email = email,
-                            availabilities = listOf()
+                            password = password,
+                            morningAvailabilities = morningAvailabilities,
+                            afternoonAvailabilities = afternoonAvailabilities,
+                            nightAvailabilities = nightAvailabilities,
                         )
                     )
 

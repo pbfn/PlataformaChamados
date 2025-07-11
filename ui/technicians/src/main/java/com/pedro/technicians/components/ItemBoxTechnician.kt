@@ -34,6 +34,7 @@ import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.design_system.ui.theme.Gray600
 import com.pedro.design_system.ui.utils.getTwoInitialsAlways
 import com.pedro.technicians.model.TechnicianUI
+import com.pedro.technicians.model.mockListTechnicians
 
 @Composable
 fun ItemBoxTechnician(
@@ -87,20 +88,22 @@ fun ItemBoxTechnician(
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
 
-            if (technician.availabilities.isNotEmpty())
+            val availabilities = technician.morningAvailabilities + technician.afternoonAvailabilities + technician.nightAvailabilities
+
+            if (availabilities.isNotEmpty())
                 TagTime(
                     isReadyOnly = true,
                     isSelected = false,
-                    label = technician.availabilities.first(),
+                    label = availabilities.first(),
                     onClick = {}
                 )
 
-            if (technician.availabilities.size > 1) {
+            if (availabilities.size > 1) {
 
                 TagTime(
                     isReadyOnly = true,
                     isSelected = false,
-                    label = "+${technician.availabilities.size - 1}",
+                    label = "+${availabilities.size - 1}",
                     onClick = {}
                 )
             }
@@ -193,12 +196,7 @@ fun ItemBoxTechnicianSkeleton() {
 @Composable
 private fun ItemBoxTechnicianPreview() {
     ItemBoxTechnician(
-        technician = TechnicianUI(
-            id = 1,
-            name = "Pedro Bruno",
-            email = "pedro@gmail.com",
-            availabilities = listOf("08:00", "10:00", "13:00", "15:00")
-        ),
+        technician = mockListTechnicians.first(),
         onClickEditTechnician = {}
     )
 }

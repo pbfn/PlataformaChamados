@@ -16,6 +16,7 @@ class TechnicianRemoteDataSourceImpl(
                 id = it.id,
                 name = it.name,
                 email = it.email,
+                password = "",
                 availabilities = it.availabilities
             )
         }
@@ -26,8 +27,9 @@ class TechnicianRemoteDataSourceImpl(
             TechnicianDTO(
                 nome = technicianRemote.name,
                 login = technicianRemote.email,
-                senha = "123456",
-                role = "TECHNICIAN"
+                senha = technicianRemote.password,
+                role = "TECHNICIAN",
+                availabilities = technicianRemote.availabilities
             )
         )
     }
