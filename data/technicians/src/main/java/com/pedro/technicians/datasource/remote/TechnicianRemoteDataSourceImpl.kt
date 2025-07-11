@@ -3,6 +3,7 @@ package com.pedro.technicians.datasource.remote
 import com.pedro.network.FireStoreProvider
 import com.pedro.network.service.TechnicianApiService
 import com.pedro.network.service.TechnicianDTO
+import com.pedro.network.service.TechnicianUpdateDTO
 import com.pedro.technicians.model.remote.TechnicianRemote
 
 class TechnicianRemoteDataSourceImpl(
@@ -41,6 +42,17 @@ class TechnicianRemoteDataSourceImpl(
                 email = technicianRemote.email,
                 password = technicianRemote.password,
                 role = "TECHNICIAN",
+                availabilities = technicianRemote.availabilities
+            )
+        )
+    }
+
+    override suspend fun updateTechnician(technicianRemote: TechnicianRemote) {
+        technicianApiService.updateTechnician(
+            id = technicianRemote.id,
+            technicianUpdateDTO = TechnicianUpdateDTO(
+                name = technicianRemote.name,
+                email = technicianRemote.email,
                 availabilities = technicianRemote.availabilities
             )
         )

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pedro.technicians.GetTechnicianByIdUseCase
 import com.pedro.technicians.SaveTechnicianUseCase
+import com.pedro.technicians.UpdateTechnicianUseCase
 import com.pedro.technicians.events.ProfileUiEvents
 import com.pedro.technicians.mapper.toUI
 import com.pedro.technicians.model.HoursType
@@ -26,7 +27,8 @@ import kotlinx.coroutines.withContext
 
 class ProfileScreenViewModel(
     private val getTechnicianByIdUseCase: GetTechnicianByIdUseCase,
-    private val saveTechnicianUseCase: SaveTechnicianUseCase
+    private val saveTechnicianUseCase: SaveTechnicianUseCase,
+    private val updateTechnicianUseCase: UpdateTechnicianUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
@@ -161,18 +163,32 @@ class ProfileScreenViewModel(
                     val morningAvailabilities = currentState.boxOpeningHoursUiState.listMorningSelected
                     val afternoonAvailabilities = currentState.boxOpeningHoursUiState.listAfternoonSelected
                     val nightAvailabilities = currentState.boxOpeningHoursUiState.listNightSelected
+                    val isEdit = currentState.boxPersonalDataUiState.isEdit
 
-
-                    saveTechnicianUseCase.invoke(
-                        technicianDomain = TechnicianDomain(
-                            name = name,
-                            email = email,
-                            password = password,
-                            morningAvailabilities = morningAvailabilities,
-                            afternoonAvailabilities = afternoonAvailabilities,
-                            nightAvailabilities = nightAvailabilities,
+                    if (isEdit) {
+                        updateTechnicianUseCase.invoke(
+                            technicianDomain = TechnicianDomain(
+                                id = currentState.technicianSelectedID,
+                                name = name,
+                                email = email,
+                                password = password,
+                                morningAvailabilities = morningAvailabilities,
+                                afternoonAvailabilities = afternoonAvailabilities,
+                                nightAvailabilities = nightAvailabilities,
+                            )
                         )
-                    )
+                    } else {
+                        saveTechnicianUseCase.invoke(
+                            technicianDomain = TechnicianDomain(
+                                name = name,
+                                email = email,
+                                password = password,
+                                morningAvailabilities = morningAvailabilities,
+                                afternoonAvailabilities = afternoonAvailabilities,
+                                nightAvailabilities = nightAvailabilities,
+                            )
+                        )
+                    }
 
                     _eventFlow.emit(ProfileUiEvents.TechnicianSaved)
                 }

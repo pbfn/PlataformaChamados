@@ -18,45 +18,6 @@ class TechnicianRepositoryImpl(
     private val remoteDataSource: TechnicianRemoteDataSource
 ) : TechnicianRepository {
 
-    private val mockedList = listOf(
-        Technician(
-            id = "1",
-            name = "Pedro Bruno",
-            email = "pedro@gmail.com",
-            password = "",
-            availabilities = listOf("08:00", "10:00", "13:00", "15:00")
-        ),
-        Technician(
-            id = "2",
-            name = "Rebeca Nantes",
-            email = "rebeca@gmail.com",
-            password = "",
-            availabilities = listOf(
-                "10:00",
-                "11:00",
-                "13:00",
-                "15:00",
-                "18:00",
-                "21:00",
-                "22:00"
-            )
-        ),
-        Technician(
-            id = "3",
-            name = "João Paulo",
-            email = "joao@gmail.com",
-            password = "",
-            availabilities = listOf("15:00", "18:00", "21:00", "22:00")
-        ),
-        Technician(
-            email = "ricardo@gmail.com",
-            id = "4",
-            name = "Ricardo",
-            password = "",
-            availabilities = listOf("16:00")
-        ),
-    )
-
     override fun loadAllTechnicians(): Flow<List<TechnicianDomain>> = flow {
         emit(
             remoteDataSource.getAllTechnicians().map {
@@ -89,6 +50,18 @@ class TechnicianRepositoryImpl(
                 name = technicianDomain.name,
                 email = technicianDomain.email,
                 password = technicianDomain.password,
+                availabilities = technicianDomain.morningAvailabilities + technicianDomain.afternoonAvailabilities + technicianDomain.nightAvailabilities,
+            )
+        )
+    }
+
+    override suspend fun updateTechnician(technicianDomain: TechnicianDomain) {
+        remoteDataSource.updateTechnician(
+            TechnicianRemote(
+                id = technicianDomain.id,
+                name = technicianDomain.name,
+                email = technicianDomain.email,
+                password = "",
                 availabilities = technicianDomain.morningAvailabilities + technicianDomain.afternoonAvailabilities + technicianDomain.nightAvailabilities,
             )
         )

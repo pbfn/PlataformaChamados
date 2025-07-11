@@ -10,4 +10,6 @@ interface TechnicianRepository {
     fun loadTechnicianById(id: String): Flow<TechnicianDomain?>
 
     suspend fun saveTechnician(technicianDomain: TechnicianDomain)
+
+    suspend fun updateTechnician(technicianDomain: TechnicianDomain)
 }
