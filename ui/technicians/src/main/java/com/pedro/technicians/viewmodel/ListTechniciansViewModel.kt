@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pedro.technicians.GetAllTechniciansUseCase
+import com.pedro.technicians.events.ListTechniciansUiEvents
 import com.pedro.technicians.mapper.toUI
 import com.pedro.technicians.states.ListTechniciansUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,12 +19,17 @@ class ListTechniciansViewModel(
     private val _state = MutableStateFlow<ListTechniciansUiState>(ListTechniciansUiState.Loading)
     val state: StateFlow<ListTechniciansUiState> = _state.asStateFlow()
 
-    init {
-        init()
+    fun onEvent(event: ListTechniciansUiEvents){
+        when(event){
+            ListTechniciansUiEvents.OnLoadTechnicians -> onLoadTechnicians()
+        }
+
     }
 
-    fun init() {
+    private fun onLoadTechnicians() {
+
         viewModelScope.launch {
+            _state.value = ListTechniciansUiState.Loading
             getSearchContentsUseCase.invoke().collect { retorno ->
                 Log.d("getSearchContentsUseCase", "init: $retorno")
                 val list = retorno.map { item ->
@@ -33,4 +39,6 @@ class ListTechniciansViewModel(
             }
         }
     }
+
+
 }

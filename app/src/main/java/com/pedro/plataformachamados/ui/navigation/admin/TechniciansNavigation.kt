@@ -1,11 +1,13 @@
 package com.pedro.plataformachamados.ui.navigation.admin
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.pedro.technicians.events.ListTechniciansUiEvents
 import com.pedro.technicians.model.TechnicianUI
 import com.pedro.technicians.screens.ListTechniciansScreen
 import com.pedro.technicians.viewmodel.ListTechniciansViewModel
@@ -18,6 +20,11 @@ fun NavGraphBuilder.technicianScreen(
     composable(DrawerHomeAdminDestinations.Technicians.route) {
         val viewModel = koinViewModel<ListTechniciansViewModel>()
         val state by viewModel.state.collectAsState()
+
+        LaunchedEffect(Unit) {
+            viewModel.onEvent(ListTechniciansUiEvents.OnLoadTechnicians)
+        }
+
         ListTechniciansScreen(
             onClickAddTechnician = onNavigateToAddTechnician,
             onClickEditTechnician = { technician ->
