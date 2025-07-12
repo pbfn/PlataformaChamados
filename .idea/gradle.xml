@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/register_user" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/services" />
             <option value="$PROJECT_DIR$/ui/technicians" />
           </set>
         </option>
