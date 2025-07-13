@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,7 @@ import com.pedro.design_system.ui.components.util.rememberSkeletonBrush
 import com.pedro.design_system.ui.theme.BlueBase
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.FeedbackDanger
+import com.pedro.design_system.ui.theme.Gray100
 import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.Gray400
@@ -48,6 +50,7 @@ fun CustomTextField(
     label: String,
     helperText: String,
     isError: Boolean,
+    isMoney: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
     keyboardActions: KeyboardActions,
@@ -82,6 +85,13 @@ fun CustomTextField(
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                     ) {
+                        if (isMoney)
+                            Text(
+                                "R$",
+                                style = CustomTypography.headingMd.copy(color = Gray100),
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+
                         if (text.isNotEmpty())
                             innerTextField()
                         else
@@ -97,7 +107,7 @@ fun CustomTextField(
             cursorBrush = SolidColor(primaryColor),
             textStyle = CustomTypography.headingMd.copy(color = Gray200),
             visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
+            keyboardOptions = if (isMoney) keyboardOptions.copy(keyboardType = KeyboardType.Number) else keyboardOptions,
             keyboardActions = keyboardActions,
         )
 
@@ -178,6 +188,21 @@ private fun CustomTextFieldPrev2() {
 private fun CustomTextFieldPrev3() {
     CustomTextField(
         isError = true,
+        text = "",
+        label = "Label",
+        placeholder = "Placeholder",
+        helperText = "Helper text",
+        onTextChanged = {},
+        keyboardActions = KeyboardActions()
+    )
+}
+
+@Preview
+@Composable
+private fun CustomTextFieldPrev4() {
+    CustomTextField(
+        isError = false,
+        isMoney = true,
         text = "",
         label = "Label",
         placeholder = "Placeholder",

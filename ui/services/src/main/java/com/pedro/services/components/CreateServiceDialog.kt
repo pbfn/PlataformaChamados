@@ -115,9 +115,10 @@ fun CreateServiceDialog(
                     label = "VALOR",
                     helperText = "",
                     isError = false,
+                    isMoney = true,
                     keyboardActions = KeyboardActions(
                         onNext = {
-                            focusManager.moveFocus(FocusDirection.Down)
+                            focusManager.moveFocus(FocusDirection.Enter)
                         }
                     ),
                     onTextChanged = {
