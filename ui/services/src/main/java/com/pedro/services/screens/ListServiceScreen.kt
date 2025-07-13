@@ -27,6 +27,7 @@ import com.pedro.design_system.ui.theme.BlueDark
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.services.components.BoxServices
+import com.pedro.services.components.CreateServiceDialog
 import com.pedro.services.model.ServiceUI
 import com.pedro.services.model.mockedListServices
 import com.pedro.services.states.ListServiceUiState
@@ -38,6 +39,7 @@ fun ListServiceScreen(
     onClickChangeStatusService: (serviceUI: ServiceUI) -> Unit,
     onClickEditService: (serviceUI: ServiceUI) -> Unit,
     onCreateService: () -> Unit,
+    onDismissDialogCreateService: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -103,6 +105,19 @@ fun ListServiceScreen(
             }
 
             is ListServiceUiState.Success -> {
+
+                if (state.showCreateServiceDialog)
+                    CreateServiceDialog(
+                        onDismiss = {
+                            onDismissDialogCreateService()
+                        },
+                        onSave = {},
+                        serviceName = "",
+                        serviceValue = "",
+                        onChangeServiceName = {},
+                        onChangeServiceValue = {}
+                    )
+
                 Column(
                     modifier = modifier
                         .fillMaxWidth(),
@@ -150,7 +165,8 @@ private fun ListServiceScreenPreview() {
         ),
         onClickEditService = {},
         onClickChangeStatusService = {},
-        onCreateService = {}
+        onCreateService = {},
+        onDismissDialogCreateService = {}
     )
 }
 
@@ -161,6 +177,7 @@ private fun ListServiceScreenPreview1() {
         state = ListServiceUiState.Loading,
         onClickEditService = {},
         onClickChangeStatusService = {},
-        onCreateService = {}
+        onCreateService = {},
+        onDismissDialogCreateService = {}
     )
 }

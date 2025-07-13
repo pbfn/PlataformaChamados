@@ -8,6 +8,7 @@ import com.pedro.services.states.ListServiceUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ListServicesViewModel : ViewModel() {
@@ -21,7 +22,8 @@ class ListServicesViewModel : ViewModel() {
             ListServiceUiEvents.OnLoadServices -> onLoadServices()
             is ListServiceUiEvents.OnChangeStatusService -> {}
             is ListServiceUiEvents.OnEditService -> {}
-            ListServiceUiEvents.OnCreateService -> {}
+            ListServiceUiEvents.OnCreateService -> onClickCreateService()
+            ListServiceUiEvents.OnDismissDialogCreateService -> onDismissDialogCreateService()
         }
 
     }
@@ -32,6 +34,28 @@ class ListServicesViewModel : ViewModel() {
             _state.value = ListServiceUiState.Success(
                 listServices = mockedListServices
             )
+        }
+    }
+
+    private fun onClickCreateService() {
+        _state.update { currentState ->
+            when (currentState) {
+                is ListServiceUiState.Success -> {
+                    currentState.copy(showCreateServiceDialog = true)
+                }
+                else -> currentState
+            }
+        }
+    }
+
+    private fun onDismissDialogCreateService(){
+        _state.update { currentState ->
+            when (currentState) {
+                is ListServiceUiState.Success -> {
+                    currentState.copy(showCreateServiceDialog = false)
+                }
+                else -> currentState
+            }
         }
     }
 }
