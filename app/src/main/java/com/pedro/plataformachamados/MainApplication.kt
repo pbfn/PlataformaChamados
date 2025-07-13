@@ -2,6 +2,7 @@ package com.pedro.plataformachamados
 
 import android.app.Application
 import com.pedro.plataformachamados.di.viewModelModule
+import com.pedro.services.di.provideServicesModules
 import com.pedro.technicians.di.provideDataModules
 import com.pedro.technicians.di.provideTechniciansModules
 import di.provideFirebaseModule
@@ -22,6 +23,7 @@ class MainApplication : Application() {
                 provideFirebaseModule(),
                 *provideDataModules().toTypedArray(),
                 *provideTechniciansModules().toTypedArray(),
+                *provideServicesModules().toTypedArray(),
                 viewModelModule,
             )
         }

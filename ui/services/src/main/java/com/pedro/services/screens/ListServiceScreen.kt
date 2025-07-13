@@ -27,6 +27,7 @@ import com.pedro.design_system.ui.theme.BlueDark
 import com.pedro.design_system.ui.theme.CustomTypography
 import com.pedro.design_system.ui.theme.Gray500
 import com.pedro.services.components.BoxServices
+import com.pedro.services.model.ServiceUI
 import com.pedro.services.model.mockedListServices
 import com.pedro.services.states.ListServiceUiState
 
@@ -34,6 +35,9 @@ import com.pedro.services.states.ListServiceUiState
 fun ListServiceScreen(
     modifier: Modifier = Modifier,
     state: ListServiceUiState,
+    onClickChangeStatusService: (serviceUI: ServiceUI) -> Unit,
+    onClickEditService: (serviceUI: ServiceUI) -> Unit,
+    onCreateService: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -91,12 +95,13 @@ fun ListServiceScreen(
                         }
                         repeat(10) {
                             //
-                        // ItemBoxTechnicianSkeleton()
+                            // ItemBoxTechnicianSkeleton()
                         }
                     }
 
                 }
             }
+
             is ListServiceUiState.Success -> {
                 Column(
                     modifier = modifier
@@ -115,11 +120,19 @@ fun ListServiceScreen(
                             sizeCustomButton = SizeCustomButton.Large,
                             iconRes = R.drawable.plus,
                             onClick = {
-
+                                onCreateService()
                             }
                         )
                     }
-                    BoxServices(mockedListServices,{},{})
+                    BoxServices(
+                        listServices = state.listServices,
+                        onClickEditService = {
+                            onClickEditService(it)
+                        },
+                        onClickChangeStatusService = {
+                            onClickChangeStatusService(it)
+                        }
+                    )
                 }
             }
         }
@@ -134,7 +147,10 @@ private fun ListServiceScreenPreview() {
     ListServiceScreen(
         state = ListServiceUiState.Success(
             listServices = mockedListServices
-        )
+        ),
+        onClickEditService = {},
+        onClickChangeStatusService = {},
+        onCreateService = {}
     )
 }
 
@@ -142,6 +158,9 @@ private fun ListServiceScreenPreview() {
 @Composable
 private fun ListServiceScreenPreview1() {
     ListServiceScreen(
-        state = ListServiceUiState.Loading
+        state = ListServiceUiState.Loading,
+        onClickEditService = {},
+        onClickChangeStatusService = {},
+        onCreateService = {}
     )
 }
