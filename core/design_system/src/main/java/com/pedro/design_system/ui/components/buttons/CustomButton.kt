@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +38,7 @@ fun CustomButton(
     @DrawableRes iconRes: Int? = null,
     sizeCustomButton: SizeCustomButton,
     typeCustomButton: TypeCustomButton,
+    isLoading: Boolean = false
 ) {
     val heightIn = when (sizeCustomButton) {
         SizeCustomButton.Small -> 28.dp
@@ -79,20 +81,24 @@ fun CustomButton(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            iconRes?.let {
-                Icon(
-                    modifier = Modifier.size(iconSize),
-                    painter = painterResource(id = iconRes),
-                    contentDescription = "Icone do botão",
-                    tint = iconTextColor
-                )
-            }
-            text?.let {
-                Text(
-                    text = text,
-                    style = CustomTypography.textXs.copy(fontWeight = FontWeight.Bold),
-                    color = iconTextColor
-                )
+            if(isLoading){
+                CircularProgressIndicator(color = iconTextColor, modifier = Modifier.size(iconSize), strokeWidth = 2.dp)
+            }else{
+                iconRes?.let {
+                    Icon(
+                        modifier = Modifier.size(iconSize),
+                        painter = painterResource(id = iconRes),
+                        contentDescription = "Icone do botão",
+                        tint = iconTextColor
+                    )
+                }
+                text?.let {
+                    Text(
+                        text = text,
+                        style = CustomTypography.textXs.copy(fontWeight = FontWeight.Bold),
+                        color = iconTextColor
+                    )
+                }
             }
         }
     }

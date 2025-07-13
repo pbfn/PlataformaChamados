@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.pedro.design_system.R
 import com.pedro.design_system.ui.components.buttons.CustomButton
 import com.pedro.design_system.ui.components.buttons.SizeCustomButton
@@ -40,6 +41,7 @@ fun CreateServiceDialog(
     onSave: () -> Unit,
     serviceName: String,
     serviceValue: String,
+    isSaving: Boolean,
     onChangeServiceName: (String) -> Unit,
     onChangeServiceValue: (String) -> Unit,
 ) {
@@ -49,10 +51,17 @@ fun CreateServiceDialog(
     Dialog(
         onDismissRequest = {
             onDismiss()
-        }) {
-        Column(modifier = Modifier
-            .clip(RoundedCornerShape(10.dp))
-            .background(color = Gray600)) {
+        },
+        properties = DialogProperties(
+            dismissOnBackPress = !isSaving,
+            dismissOnClickOutside = !isSaving
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .background(color = Gray600)
+        ) {
             Row(
                 modifier = Modifier.padding(horizontal = 28.dp, vertical = 21.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -69,6 +78,7 @@ fun CreateServiceDialog(
                     onClick = {
                         onDismiss()
                     },
+                    enabled = !isSaving,
                     modifier = Modifier.size(24.dp)
                 ) {
                     Icon(
@@ -125,6 +135,7 @@ fun CreateServiceDialog(
                     onClick = { onSave() },
                     sizeCustomButton = SizeCustomButton.Large,
                     typeCustomButton = TypeCustomButton.Primary,
+                    isLoading = isSaving
                 )
             }
         }
@@ -141,6 +152,21 @@ private fun CreateServiceDialogPreview() {
         onChangeServiceName = {},
         onChangeServiceValue = {},
         serviceName = "",
-        serviceValue = ""
+        serviceValue = "",
+        isSaving = false
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CreateServiceDialogPreview1() {
+    CreateServiceDialog(
+        onDismiss = {},
+        onSave = {},
+        onChangeServiceName = {},
+        onChangeServiceValue = {},
+        serviceName = "",
+        serviceValue = "",
+        isSaving = true
     )
 }

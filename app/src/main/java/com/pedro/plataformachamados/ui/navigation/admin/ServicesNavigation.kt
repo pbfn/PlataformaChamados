@@ -33,6 +33,9 @@ fun NavGraphBuilder.servicesScreen() {
             },
             onDismissDialogCreateService = {
                 viewModel.onEvent(ListServiceUiEvents.OnDismissDialogCreateService)
+            },
+            onSaveService = {
+                viewModel.onEvent(ListServiceUiEvents.OnSaveService)
             }
         )
     }

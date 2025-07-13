@@ -18,23 +18,23 @@ class ListServicesViewModel : ViewModel() {
 
 
     fun onEvent(event: ListServiceUiEvents) {
-        when (event) {
-            ListServiceUiEvents.OnLoadServices -> onLoadServices()
-            is ListServiceUiEvents.OnChangeStatusService -> {}
-            is ListServiceUiEvents.OnEditService -> {}
-            ListServiceUiEvents.OnCreateService -> onClickCreateService()
-            ListServiceUiEvents.OnDismissDialogCreateService -> onDismissDialogCreateService()
+        viewModelScope.launch {
+            when (event) {
+                ListServiceUiEvents.OnLoadServices -> onLoadServices()
+                is ListServiceUiEvents.OnChangeStatusService -> {}
+                is ListServiceUiEvents.OnEditService -> {}
+                ListServiceUiEvents.OnCreateService -> onClickCreateService()
+                ListServiceUiEvents.OnDismissDialogCreateService -> onDismissDialogCreateService()
+                ListServiceUiEvents.OnSaveService -> onSaveService()
+            }
         }
-
     }
 
     private fun onLoadServices() {
-        viewModelScope.launch {
-            _state.value = ListServiceUiState.Loading
-            _state.value = ListServiceUiState.Success(
-                listServices = mockedListServices
-            )
-        }
+        _state.value = ListServiceUiState.Loading
+        _state.value = ListServiceUiState.Success(
+            listServices = mockedListServices
+        )
     }
 
     private fun onClickCreateService() {
@@ -43,17 +43,31 @@ class ListServicesViewModel : ViewModel() {
                 is ListServiceUiState.Success -> {
                     currentState.copy(showCreateServiceDialog = true)
                 }
+
                 else -> currentState
             }
         }
     }
 
-    private fun onDismissDialogCreateService(){
+    private fun onDismissDialogCreateService() {
         _state.update { currentState ->
             when (currentState) {
                 is ListServiceUiState.Success -> {
                     currentState.copy(showCreateServiceDialog = false)
                 }
+
+                else -> currentState
+            }
+        }
+    }
+
+    private fun onSaveService() {
+        _state.update { currentState ->
+            when (currentState) {
+                is ListServiceUiState.Success -> {
+                    currentState.copy(isSaving = true)
+                }
+
                 else -> currentState
             }
         }

@@ -39,6 +39,7 @@ fun ListServiceScreen(
     onClickChangeStatusService: (serviceUI: ServiceUI) -> Unit,
     onClickEditService: (serviceUI: ServiceUI) -> Unit,
     onCreateService: () -> Unit,
+    onSaveService: () -> Unit,
     onDismissDialogCreateService: () -> Unit
 ) {
     Column(
@@ -111,9 +112,12 @@ fun ListServiceScreen(
                         onDismiss = {
                             onDismissDialogCreateService()
                         },
-                        onSave = {},
+                        onSave = {
+                            onSaveService()
+                        },
                         serviceName = "",
                         serviceValue = "",
+                        isSaving = state.isSaving,
                         onChangeServiceName = {},
                         onChangeServiceValue = {}
                     )
@@ -166,7 +170,8 @@ private fun ListServiceScreenPreview() {
         onClickEditService = {},
         onClickChangeStatusService = {},
         onCreateService = {},
-        onDismissDialogCreateService = {}
+        onDismissDialogCreateService = {},
+        onSaveService = {}
     )
 }
 
@@ -178,6 +183,7 @@ private fun ListServiceScreenPreview1() {
         onClickEditService = {},
         onClickChangeStatusService = {},
         onCreateService = {},
-        onDismissDialogCreateService = {}
+        onDismissDialogCreateService = {},
+        onSaveService = {}
     )
 }
