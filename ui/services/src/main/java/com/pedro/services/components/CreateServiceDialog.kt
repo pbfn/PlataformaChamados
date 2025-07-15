@@ -121,8 +121,8 @@ fun CreateServiceDialog(
                             focusManager.moveFocus(FocusDirection.Enter)
                         }
                     ),
-                    onTextChanged = {
-                        onChangeServiceValue(it)
+                    onTextChanged = { newValue ->
+                        onChangeServiceValue(newValue)
                     }
                 )
             }

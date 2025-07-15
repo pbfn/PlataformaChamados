@@ -25,9 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +44,7 @@ import com.pedro.design_system.ui.theme.Gray200
 import com.pedro.design_system.ui.theme.Gray300
 import com.pedro.design_system.ui.theme.Gray400
 import com.pedro.design_system.ui.theme.Gray500
+import com.pedro.design_system.ui.utils.MoneyVisualTransformation
 
 @Composable
 fun CustomTextField(
@@ -106,7 +110,7 @@ fun CustomTextField(
             },
             cursorBrush = SolidColor(primaryColor),
             textStyle = CustomTypography.headingMd.copy(color = Gray200),
-            visualTransformation = visualTransformation,
+            visualTransformation = if(isMoney) MoneyVisualTransformation() else visualTransformation,
             keyboardOptions = if (isMoney) keyboardOptions.copy(keyboardType = KeyboardType.Number) else keyboardOptions,
             keyboardActions = keyboardActions,
         )

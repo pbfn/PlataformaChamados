@@ -26,6 +26,8 @@ class ListServicesViewModel : ViewModel() {
                 ListServiceUiEvents.OnCreateService -> onClickCreateService()
                 ListServiceUiEvents.OnDismissDialogCreateService -> onDismissDialogCreateService()
                 ListServiceUiEvents.OnSaveService -> onSaveService()
+                is ListServiceUiEvents.OnChangeServiceValue -> onChangeServiceValue(event.newValue)
+                is ListServiceUiEvents.OnChangeServiceName -> onChangeServiceName(event.newValue)
             }
         }
     }
@@ -71,5 +73,23 @@ class ListServicesViewModel : ViewModel() {
                 else -> currentState
             }
         }
+    }
+
+    private fun onChangeServiceValue(newValue: String) {
+        val digitsOnly = newValue.filter { it.isDigit() }
+
+        val state = _state.value
+        if (state is ListServiceUiState.Success) {
+            _state.value = state.copy(serviceValue = digitsOnly)
+        }
+
+    }
+
+    private fun onChangeServiceName(newValue: String) {
+        val state = _state.value
+        if (state is ListServiceUiState.Success) {
+            _state.value = state.copy(serviceName = newValue)
+        }
+
     }
 }

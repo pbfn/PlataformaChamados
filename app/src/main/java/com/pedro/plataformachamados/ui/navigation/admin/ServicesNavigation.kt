@@ -36,7 +36,13 @@ fun NavGraphBuilder.servicesScreen() {
             },
             onSaveService = {
                 viewModel.onEvent(ListServiceUiEvents.OnSaveService)
-            }
+            },
+            onChangeServiceValue = {
+                viewModel.onEvent(ListServiceUiEvents.OnChangeServiceValue(it))
+            },
+            onChangeServiceName = {
+                viewModel.onEvent(ListServiceUiEvents.OnChangeServiceName(it))
+            },
         )
     }
 }

@@ -9,4 +9,6 @@ sealed class ListServiceUiEvents {
     object OnSaveService : ListServiceUiEvents()
     data class OnChangeStatusService(val serviceUI: ServiceUI) : ListServiceUiEvents()
     data class OnEditService(val serviceUI: ServiceUI) : ListServiceUiEvents()
+    data class OnChangeServiceValue(val newValue: String) : ListServiceUiEvents()
+    data class OnChangeServiceName(val newValue: String) : ListServiceUiEvents()
 }
