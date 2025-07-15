@@ -39,14 +39,19 @@ class FireStoreProvider(
             .await()
 
         return snapshot.documents.mapNotNull { doc ->
-            doc.toObject(ServiceResponseFireStore::class.java)?.copy(id = doc.id)
+            val base = doc.toObject(ServiceResponseFireStore::class.java)
+            val isActivity = doc.getBoolean("isActivity") ?: false
+            base?.copy(
+                id = doc.id,
+                isActivity = isActivity
+            )
         }
     }
 
     suspend fun saveService(service: ServiceResponseFireStore) {
         val serviceMap = hashMapOf(
-            "name" to service.serviceName,
-            "price" to service.serviceValue,
+            "serviceName" to service.serviceName,
+            "serviceValue" to service.serviceValue,
             "isActivity" to service.isActivity
         )
 
@@ -57,8 +62,8 @@ class FireStoreProvider(
 
     suspend fun updateService(service: ServiceResponseFireStore) {
         val serviceMap = hashMapOf(
-            "name" to service.serviceName,
-            "price" to service.serviceValue,
+            "serviceName" to service.serviceName,
+            "serviceValue" to service.serviceValue,
             "isActivity" to service.isActivity
         )
 

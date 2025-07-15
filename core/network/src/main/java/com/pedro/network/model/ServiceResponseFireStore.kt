@@ -1,8 +1,8 @@
 package com.pedro.network.model
 
 data class ServiceResponseFireStore(
-    val id: String = "",
-    val serviceName: String = "",
-    val serviceValue: String = "",
-    val isActivity: Boolean = false
+    var id: String = "",
+    var serviceName: String = "",
+    var serviceValue: Double = 0.0,
+    var isActivity: Boolean = false
 )

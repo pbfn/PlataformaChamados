@@ -73,4 +73,5 @@ dependencies {
     implementation(project(":ui:technicians"))
     implementation(project(":ui:services"))
     implementation(project(":data:technicians"))
+    implementation(project(":data:services"))
 }
