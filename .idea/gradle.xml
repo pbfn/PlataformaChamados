@@ -16,8 +16,10 @@
             <option value="$PROJECT_DIR$/core/design_system" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/services" />
             <option value="$PROJECT_DIR$/data/technicians" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/services" />
             <option value="$PROJECT_DIR$/domain/technicians" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/login" />

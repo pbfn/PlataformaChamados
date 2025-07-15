@@ -1,6 +1,7 @@
 package com.pedro.network
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pedro.network.model.ServiceResponseFireStore
 import com.pedro.network.model.TechnicianFireStore
 import kotlinx.coroutines.tasks.await
 
@@ -29,5 +30,41 @@ class FireStoreProvider(
 
         return snapshot.toObject(TechnicianFireStore::class.java)?.copy(id = snapshot.id)
 
+    }
+
+    suspend fun getAllServices(): List<ServiceResponseFireStore> {
+        val snapshot = firestore
+            .collection("services")
+            .get()
+            .await()
+
+        return snapshot.documents.mapNotNull { doc ->
+            doc.toObject(ServiceResponseFireStore::class.java)?.copy(id = doc.id)
+        }
+    }
+
+    suspend fun saveService(service: ServiceResponseFireStore) {
+        val serviceMap = hashMapOf(
+            "name" to service.serviceName,
+            "price" to service.serviceValue,
+            "isActivity" to service.isActivity
+        )
+
+        firestore.collection("services")
+            .add(serviceMap)
+            .await()
+    }
+
+    suspend fun updateService(service: ServiceResponseFireStore) {
+        val serviceMap = hashMapOf(
+            "name" to service.serviceName,
+            "price" to service.serviceValue,
+            "isActivity" to service.isActivity
+        )
+
+        firestore.collection("services")
+            .document(service.id)
+            .set(serviceMap)
+            .await()
     }
 }

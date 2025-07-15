@@ -9,5 +9,5 @@ fun provideServicesModules(): List<Module> = listOf(
     module {
         viewModelOf(::ListServicesViewModel)
     },
-
-    )
+    *provideServiceDomainModules().toTypedArray()
+)
